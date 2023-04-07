@@ -13,7 +13,7 @@ export default function HeaderComponent() {
     <header className="header ">
       <div className="container bg-light">
         <nav className="navbar navbar-expand-md navbar-light mb-2 p-2 border-bottom">
-          <Link className="navbar-brand px-4 " to="/login">
+          <Link className="navbar-brand px-4 " to="/">
             GetHired.com
           </Link>
           <div className="collapse navbar-collapse">
@@ -51,8 +51,12 @@ export default function HeaderComponent() {
                   Login
                 </a>
                 <div className="dropdown-menu">
-                  <a className="dropdown-item">JobSeeker</a>
-                  <a className="dropdown-item">Recruiter</a>
+                  <Link className="dropdown-item" to="/jobseeker/login">
+                    JobSeeker
+                  </Link>
+                  <Link className="dropdown-item" to="/recruiter/login">
+                    Recruiter
+                  </Link>
                 </div>
               </li>
             )}

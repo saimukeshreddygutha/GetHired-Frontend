@@ -10,3 +10,9 @@ export const executeBasicAuthenticationService = (token) =>
       Authorization: token,
     },
   });
+
+
+  export const addJobseekerApi = (joseeker) =>
+    apiClient.post("jobseeker/add", joseeker);
+
+  export const addUserApi = (user) => apiClient.post("user/register", user);
