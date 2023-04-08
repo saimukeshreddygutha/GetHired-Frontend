@@ -11,10 +11,10 @@ export const useAuth = () => useContext(AuthContext);
 export default function AuthProvider({ children }) {
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [username, setUsername] = useState(null);
-
+  const [role, setRole] = useState(null);
   const [token, setToken] = useState(null);
 
-  async function login(username, password) {
+  async function login(username, password, role) {
     const baToken = "Basic " + window.btoa(username + ":" + password);
     try {
       const response = await executeBasicAuthenticationService(baToken);
@@ -23,7 +23,7 @@ export default function AuthProvider({ children }) {
         setToken(baToken);
         setAuthenticated(true);
         setUsername(username);
-
+        setRole(role);
         apiClient.interceptors.request.use((config) => {
           config.headers.Authorization = baToken;
           return config;
@@ -54,6 +54,7 @@ export default function AuthProvider({ children }) {
         logout,
         username,
         token,
+        role,
       }}
     >
       {children}

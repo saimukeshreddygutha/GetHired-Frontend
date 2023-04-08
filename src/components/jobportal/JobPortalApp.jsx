@@ -5,6 +5,7 @@ import FooterComponent from "./FooterComponent";
 import { useAuth } from "./security/AuthContext";
 import IntroComponent from "./IntroComponent";
 import JobSeekerRegisterComponent from "./JobSeekerRegisterComponent";
+import JobSeekerLoginComponent from "./JobSeekerLoginComponent";
 
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth();
@@ -28,6 +29,18 @@ export default function JobPortalApp() {
               element={<JobSeekerRegisterComponent />}
             />
             <Route path="/register/recruiter" element={<IntroComponent />} />
+            <Route
+              path="/jobseeker/login"
+              element={<JobSeekerLoginComponent />}
+            />
+            <Route
+              path="/jobseeker/home   "
+              element={
+                <AuthenticatedRoute>
+                  <WelcomeComponent />
+                </AuthenticatedRoute>
+              }
+            />
           </Routes>
           <FooterComponent />
         </BrowserRouter>
