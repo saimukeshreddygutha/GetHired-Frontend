@@ -29,7 +29,7 @@ export default function IntroComponent() {
             </p>
             <Link
               className="btn btn-primary btn-lg"
-              to="/register/jobseeker"
+              to="/jobseeker/register"
               role="button"
             >
               Register as Job Seeker
@@ -50,7 +50,7 @@ export default function IntroComponent() {
             </p>
             <Link
               className="btn btn-primary btn-lg"
-              to="/register/recruiter"
+              to="/recruiter/register"
               role="button"
             >
               Register as Recruiter

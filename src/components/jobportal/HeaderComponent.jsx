@@ -14,7 +14,7 @@ export default function HeaderComponent() {
       <div className="container bg-light">
         <nav className="navbar navbar-expand-md navbar-light mb-2 p-2 border-bottom">
           <Link className="navbar-brand px-4 " to="/">
-            GetHired.com
+            GetHired.in
           </Link>
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav">

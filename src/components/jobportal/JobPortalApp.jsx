@@ -5,13 +5,15 @@ import FooterComponent from "./FooterComponent";
 import { useAuth } from "./security/AuthContext";
 import IntroComponent from "./IntroComponent";
 import JobSeekerRegisterComponent from "./JobSeekerRegisterComponent";
-import JobSeekerLoginComponent from "./JobSeekerLoginComponent";
+import { JobSeekerLoginComponent } from "./LoginForm";
 import HomeComponent from "./HomeComponent";
 import EducationForm from "./EducationComponent";
-import RecruiterLoginComponent from "./RecruiterLoginComponent";
+import { RecruiterLoginComponent } from "./LoginForm";
 import ExperienceForm from "./ExperienceComponent";
 import RecruiterRegisterComponent from "./RecruiterRegisterComponent";
-import AdminLoginComponent from "./AdminLoginComponent";
+import { AdminLoginComponent } from "./LoginForm";
+import JobAdComponent from "./JobAdComponent";
+import RecruiterDashboard from "./RecruiterDashboard";
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth();
   if (authContext.isAuthenticated) {
@@ -46,8 +48,10 @@ export default function JobPortalApp() {
               path="/recruiter/login"
               element={<RecruiterLoginComponent />}
             />
+            <Route path="/recruiter/:id/add-job" element={<JobAdComponent />} />
             <Route path="/jobseeker/exp" element={<ExperienceForm />} />
             <Route path="/jobseeker/edu" element={<EducationForm />} />
+            <Route path="/job-ads" element={<RecruiterDashboard />} />
           </Routes>
           <FooterComponent />
         </BrowserRouter>

@@ -3,19 +3,16 @@ import { useState } from "react";
 import { useAuth } from "./security/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-export default function RecruiterLoginComponent() {
+function LoginForm({ role, onSuccess }) {
   const authContext = useAuth();
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [showLoginError, setShowLoginError] = useState(false);
 
   async function onSubmit(values) {
     console.log(values);
-    const role = "RECRUITER";
     if (await authContext.login(values.username, values.password, role)) {
       setShowLoginError(false);
-      navigate("/recruiter/home");
+      onSuccess();
     } else {
       setShowLoginError(true);
     }
@@ -28,11 +25,12 @@ export default function RecruiterLoginComponent() {
 
     return errors;
   }
+
   return (
     <div className="container">
       <div>
         <Formik
-          initialValues={{ username, password }}
+          initialValues={{ username: "", password: "" }}
           enableReinitialize={true}
           onSubmit={onSubmit}
           validate={validate}
@@ -67,7 +65,7 @@ export default function RecruiterLoginComponent() {
                 />
                 <label>Password</label>
                 <Field
-                  type="text"
+                  type="password"
                   className="form-control mb-2"
                   name="password"
                 />
@@ -81,4 +79,23 @@ export default function RecruiterLoginComponent() {
       </div>
     </div>
   );
+}
+
+export function RecruiterLoginComponent() {
+  const navigate = useNavigate();
+  return (
+    <LoginForm role="RECRUITER" onSuccess={() => navigate("/recruiter/home")} />
+  );
+}
+
+export function JobSeekerLoginComponent() {
+  const navigate = useNavigate();
+  return (
+    <LoginForm role="JOBSEEKER" onSuccess={() => navigate("/jobseeker/home")} />
+  );
+}
+
+export function AdminLoginComponent() {
+  const navigate = useNavigate();
+  return <LoginForm role="ADMIN" onSuccess={() => navigate("/admin/home")} />;
 }

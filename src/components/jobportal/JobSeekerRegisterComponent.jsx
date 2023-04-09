@@ -88,6 +88,7 @@ export default function JobSeekerRegisterComponent() {
             location: "",
             username: "",
             password: "",
+            resumeLink: "",
           }}
           enableReinitialize={true}
           onSubmit={onSubmit}
@@ -103,7 +104,7 @@ export default function JobSeekerRegisterComponent() {
                   component="div"
                   className="alert alert-warning"
                 />
-                <label className="form-label">Full Name</label>
+                <label className="form-label">Full Name*</label>
                 <Field type="text" className="form-control" name="name" />
               </fieldset>
               <fieldset className="form-group p-3">
@@ -112,7 +113,7 @@ export default function JobSeekerRegisterComponent() {
                   component="div"
                   className="alert alert-warning"
                 />
-                <label className="form-label">Age</label>
+                <label className="form-label">Age*</label>
                 <Field type="number" className="form-control" name="age" />
               </fieldset>
               <fieldset className="form-group p-3">
@@ -121,7 +122,7 @@ export default function JobSeekerRegisterComponent() {
                   component="div"
                   className="alert alert-warning"
                 />
-                <label className="form-label">Email</label>
+                <label className="form-label">Email*</label>
                 <Field type="text" className="form-control" name="email" />
               </fieldset>
               <fieldset className="form-group p-3">
@@ -130,7 +131,7 @@ export default function JobSeekerRegisterComponent() {
                   component="div"
                   className="alert alert-warning"
                 />
-                <label className="form-label">Gender</label>
+                <label className="form-label">Gender*</label>
                 <Field
                   className="form-control"
                   as="select"
@@ -150,7 +151,7 @@ export default function JobSeekerRegisterComponent() {
                   component="div"
                   className="alert alert-warning"
                 />
-                <label className="form-label">Date of Birth</label>
+                <label className="form-label">Date of Birth*</label>
                 <Field type="date" className="form-control" name="dob" />
               </fieldset>
               <fieldset className="form-group p-3">
@@ -159,8 +160,17 @@ export default function JobSeekerRegisterComponent() {
                   component="div"
                   className="alert alert-warning"
                 />
-                <label className="form-label">Location</label>
+                <label className="form-label">Location*</label>
                 <Field type="text" className="form-control" name="location" />
+              </fieldset>
+              <fieldset className="form-group p-3">
+                <ErrorMessage
+                  name="resumeLink"
+                  component="div"
+                  className="alert alert-warning"
+                />
+                <label className="form-label">Resume Link*</label>
+                <Field type="text" className="form-control" name="resumeLink" />
               </fieldset>
               <hr className="border border-success border-3 opacity-75"></hr>
               <fieldset className="form-group p-3">
@@ -170,7 +180,7 @@ export default function JobSeekerRegisterComponent() {
                   className="alert alert-warning"
                 />
 
-                <label className="form-label">Username</label>
+                <label className="form-label">Username*</label>
                 <Field type="text" className="form-control" name="username" />
               </fieldset>
               <fieldset className="form-group p-3">
@@ -179,7 +189,7 @@ export default function JobSeekerRegisterComponent() {
                   component="div"
                   className="alert alert-warning"
                 />
-                <label className="form-label">Password</label>
+                <label className="form-label">Password*</label>
                 <Field
                   type="password"
                   className="form-control"

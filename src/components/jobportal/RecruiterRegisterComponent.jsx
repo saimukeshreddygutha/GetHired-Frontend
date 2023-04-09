@@ -69,6 +69,7 @@ function RecruiterRegisterComponent() {
             email: "",
             username: "",
             password: "",
+            confirmPassword: "",
           }}
           enableReinitialize={true}
           onSubmit={onSubmit}
@@ -148,6 +149,19 @@ function RecruiterRegisterComponent() {
                 />
               </fieldset>
 
+              <fieldset className="form-group p-3">
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="alert alert-warning"
+                />
+                <label className="form-label">Confirm Password</label>
+                <Field
+                  type="password"
+                  className="form-control"
+                  name="password"
+                />
+              </fieldset>
               {!isRegistered && (
                 <button
                   className="btn btn-primary"

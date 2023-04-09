@@ -6,7 +6,7 @@ export default function FooterComponent() {
       <div className="container bg-light">
         <div className="p-2 border-top">
           <div className="copyright">© 2023 Copyright:</div>
-          GetHired.com
+          GetHired.in
         </div>
       </div>
     </footer>
