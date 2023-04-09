@@ -25,10 +25,10 @@ function AuthenticatedRoute({ children }) {
 
 export default function JobPortalApp() {
   return (
-    <div className="JobPortalApp">
-      <AuthProvider>
-        <BrowserRouter>
-          <HeaderComponent />
+    <AuthProvider>
+      <BrowserRouter>
+        <HeaderComponent />
+        <div className="container bg-light jbptl">
           <Routes>
             <Route path="/" element={<IntroComponent />} />
             <Route
@@ -53,9 +53,9 @@ export default function JobPortalApp() {
             <Route path="/jobseeker/edu" element={<EducationForm />} />
             <Route path="/job-ads" element={<RecruiterDashboard />} />
           </Routes>
-          <FooterComponent />
-        </BrowserRouter>
-      </AuthProvider>
-    </div>
+        </div>
+        <FooterComponent />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }

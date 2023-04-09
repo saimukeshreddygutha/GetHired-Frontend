@@ -10,11 +10,11 @@ export default function HeaderComponent() {
   }
 
   return (
-    <header className="header ">
-      <div className="container bg-light">
-        <nav className="navbar navbar-expand-md navbar-light mb-2 p-2 border-bottom">
+    <header className="header-color">
+      <div className="container py-2 mb-5">
+        <nav className="navbar navbar-expand-lg navbar-light px-2 border-bottom">
           <Link className="navbar-brand px-4 " to="/">
-            GetHired.in
+            <span className="brand">GetHired.in</span>
           </Link>
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav">
@@ -43,12 +43,12 @@ export default function HeaderComponent() {
               </li>
             )}
             {!isAuthenticated && (
-              <li className="nav-item dropdown me-5 pe-4">
+              <li className="nav-item dropdown pe-5 me-5">
                 <a
                   className="nav-link dropdown-toggle"
                   data-bs-toggle="dropdown"
                 >
-                  Login
+                  <span className="brand">Login</span>
                 </a>
                 <div className="dropdown-menu">
                   <Link className="dropdown-item" to="/jobseeker/login">

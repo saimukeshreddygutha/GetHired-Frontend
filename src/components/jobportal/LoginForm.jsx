@@ -20,14 +20,14 @@ function LoginForm({ role, onSuccess }) {
 
   function validate(values) {
     const errors = {};
-    if (!values.username) errors.username = "Username cannot be empty";
-    if (!values.password) errors.password = "Password cannot be empty";
+    if (!values.username) errors.username = "Username cannot be empty!";
+    if (!values.password) errors.password = "Password cannot be empty!";
 
     return errors;
   }
 
   return (
-    <div className="container">
+    <div className="container bg-light w-25">
       <div>
         <Formik
           initialValues={{ username: "", password: "" }}
@@ -40,39 +40,39 @@ function LoginForm({ role, onSuccess }) {
           {(props) => (
             <Form>
               {showLoginError && (
-                <div className="alert alert-danger">Authentication Failed!</div>
+                <div className="alert alert-danger center">
+                  Authentication Failed!
+                </div>
               )}
 
-              <fieldset className="form-group">
+              <fieldset className="form-group mb-3">
                 <ErrorMessage
                   name="username"
                   component="div"
-                  className="alert alert-warning"
+                  className="alert alert-warning center"
                 />
                 <label>Username</label>
-                <Field
-                  type="text"
-                  className="form-control mb-2"
-                  name="username"
-                />
+                <Field type="text" className="form-control" name="username" />
               </fieldset>
 
-              <fieldset className="form-group">
+              <fieldset className="form-group mb-3">
                 <ErrorMessage
                   name="password"
                   component="div"
-                  className="alert alert-warning"
+                  className="alert alert-warning center"
                 />
                 <label>Password</label>
                 <Field
                   type="password"
-                  className="form-control mb-2"
+                  className="form-control"
                   name="password"
                 />
               </fieldset>
-              <button className="btn btn-primary" type="submit">
-                Login
-              </button>
+              <div className="center">
+                <button className="btn btn-primary px-4" type="submit">
+                  Login
+                </button>
+              </div>
             </Form>
           )}
         </Formik>
