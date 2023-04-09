@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 import {
   apiClient,
   executeBasicAuthenticationService,
+  getJobSeekerId,
 } from "../api/JobPortalAPIService";
 
 export const AuthContext = createContext();
@@ -13,6 +14,7 @@ export default function AuthProvider({ children }) {
   const [username, setUsername] = useState(null);
   const [role, setRole] = useState(null);
   const [token, setToken] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   async function login(username, password, role) {
     const baToken = "Basic " + window.btoa(username + ":" + password);
@@ -24,10 +26,13 @@ export default function AuthProvider({ children }) {
         setAuthenticated(true);
         setUsername(username);
         setRole(role);
+
         apiClient.interceptors.request.use((config) => {
           config.headers.Authorization = baToken;
           return config;
         });
+        const userId = await getJobSeekerId(username);
+        setUserId(userId);
         return true;
       } else {
         logout();
@@ -55,6 +60,7 @@ export default function AuthProvider({ children }) {
         username,
         token,
         role,
+        userId,
       }}
     >
       {children}

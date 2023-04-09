@@ -16,3 +16,9 @@ export const executeBasicAuthenticationService = (token) =>
     apiClient.post("jobseeker/add", joseeker);
 
   export const addUserApi = (user) => apiClient.post("user/register", user);
+
+  export const addEduApi = (educationList, userId) =>
+    apiClient.post(`jobseeker/${userId}/add-edu`, educationList);
+
+  export const getJobSeekerId = (username) =>
+    apiClient.get(`jobseeker/get-id/${username}`);
