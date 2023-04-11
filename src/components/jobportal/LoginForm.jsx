@@ -7,6 +7,7 @@ function LoginForm({ role, onSuccess }) {
   const authContext = useAuth();
   const navigate = useNavigate();
   const [showLoginError, setShowLoginError] = useState(false);
+  const [isLoggedin, setIsLoggedIn] = useState(false);
 
   async function onSubmit(values) {
     console.log(values);

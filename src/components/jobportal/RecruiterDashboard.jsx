@@ -1,6 +1,6 @@
 import React from "react";
 import JobAdsTable from "./JobAdsTable";
-
+import JobApplicationsTable from "./JobApplicationsTable";
 function RecruiterDashboard() {
   const jobAds = [
     {
@@ -15,11 +15,23 @@ function RecruiterDashboard() {
       recruiterUsername: "",
     },
   ];
-
+  const jobApplications = [
+    {
+      id: "",
+      jobSeekerResumeLink: "",
+      jobSeekerEmail: "",
+      jobSeekerGender: "",
+      jobSeekerAge: "",
+      jobSeekerFullName: "",
+      jobSeekerEmail: "",
+      location: "",
+    },
+  ];
   return (
     <div>
       <h1>Recruiter Dashboard</h1>
       <JobAdsTable jobAds={jobAds} />
+      <JobApplicationsTable jobApplications={jobApplications} />
     </div>
   );
 }
