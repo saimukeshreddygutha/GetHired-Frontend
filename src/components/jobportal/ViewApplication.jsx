@@ -116,7 +116,7 @@ const ViewExperienceComponent = ({ header, data }) => {
   );
 };
 
-const ViewComponent = ({ header, data }) => {
+export const ViewComponent = ({ header, data }) => {
   return (
     <div className="row pb-2">
       <div className="col-4">{header}</div>

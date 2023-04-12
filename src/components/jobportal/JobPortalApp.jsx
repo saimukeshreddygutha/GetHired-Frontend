@@ -15,6 +15,7 @@ import { AdminLoginComponent } from "./LoginForm";
 import JobAdComponent from "./JobAdForm";
 import RecruiterDashboard from "./RecruiterDashboard";
 import ViewApplication from "./ViewApplication";
+import ViewJobAdComponent from "./ViewJobAdComponent";
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth();
   if (authContext.isAuthenticated) {
@@ -45,6 +46,10 @@ export default function JobPortalApp() {
               element={<JobSeekerLoginComponent />}
             />
             <Route path="/jobseeker/dashboard" element={<ViewApplication />} />
+            <Route
+              path="/recruiter/dashboard"
+              element={<ViewJobAdComponent />}
+            />
             <Route path="/admin/login" element={<AdminLoginComponent />} />
             <Route
               path="/recruiter/login"
