@@ -1,46 +1,68 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { addJobseekerApi, addUserApi } from "./api/JobPortalAPIService";
+import {
+  addJobseekerApi,
+  addUserApi,
+  isUsernameAlreadyExists,
+  usernameApi,
+} from "./api/JobPortalAPIService";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function JobSeekerRegisterComponent() {
   const [isRegistered, setRegistered] = useState(false);
-  const onSubmit = (values) => {
-    let jobseeker = {
-      name: values.name,
-      age: values.age,
-      email: values.email,
-      gender: values.gender,
-      dateOfBirth: values.dob,
-      location: values.location,
-    };
+  const [usernameAlreadyExists, setUsernameAlreadyExists] = useState(false);
 
-    let user = {
-      username: values.username,
-      password: values.password,
-      roles: ["JOBSEEKER"],
-    };
-    console.log(jobseeker);
-    console.log(user);
-    const jobseekerAdded = true;
-    const usercreated = true;
+  async function isUsernameAlreadyExists(username) {
+    try {
+      const response = await usernameApi(username);
+      console.log(response.status);
+      return false;
+    } catch (error) {
+      console.log(error);
+      return true;
+    }
+  }
+  async function onSubmit(values) {
+    if (await isUsernameAlreadyExists(values.username)) {
+      setUsernameAlreadyExists(true);
+    } else {
+      setUsernameAlreadyExists(false);
+      let jobseeker = {
+        name: values.name,
+        age: values.age,
+        email: values.email,
+        gender: values.gender,
+        dateOfBirth: values.dob,
+        location: values.location,
+      };
 
-    // addUserApi(user)
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.status == 204) usercreated = true;
-    //   })
-    //   .catch((error) => console.log(error));
+      let user = {
+        username: values.username,
+        password: values.password,
+        roles: ["JOBSEEKER"],
+      };
+      console.log(jobseeker);
+      console.log(user);
+      const jobseekerAdded = true;
+      const usercreated = true;
 
-    // addJobseekerApi(jobseeker)
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.status == 201) jobseekerAdded = true;
-    //   })
-    //   .catch((error) => console.log(error));
+      // addUserApi(user)
+      //   .then((response) => {
+      //     console.log(response);
+      //     if (response.status == 204) usercreated = true;
+      //   })
+      //   .catch((error) => console.log(error));
 
-    if (jobseekerAdded && usercreated) setRegistered(true);
-  };
+      // addJobseekerApi(jobseeker)
+      //   .then((response) => {
+      //     console.log(response);
+      //     if (response.status == 201) jobseekerAdded = true;
+      //   })
+      //   .catch((error) => console.log(error));
+
+      if (jobseekerAdded && usercreated) setRegistered(true);
+    }
+  }
 
   const validate = (values) => {
     const errors = {};
@@ -64,12 +86,17 @@ export default function JobSeekerRegisterComponent() {
     if (!values.location) {
       errors.location = "Location is required";
     }
-    if (!values.username) {
-      errors.username = "A valid Username is required";
-    }
-    if (!values.password) {
-      errors.password = "Password is required";
-    }
+    if (!values.username) errors.username = "Username cannot be empty!";
+
+    if (values.password.length < 8)
+      errors.password = "Password must contain atleast 8 characters!";
+    if (values.password != values.confirmPassword)
+      errors.confirmPassword = "Passwords do not match!";
+
+    if (!values.resumeLink)
+      errors.resumeLink =
+        "Public access link to your resume to be attached here.";
+
     return errors;
   };
 
@@ -89,6 +116,7 @@ export default function JobSeekerRegisterComponent() {
             username: "",
             password: "",
             resumeLink: "",
+            confirmPassword: "",
           }}
           enableReinitialize={true}
           onSubmit={onSubmit}
@@ -98,126 +126,165 @@ export default function JobSeekerRegisterComponent() {
         >
           {({ isSubmitting }) => (
             <Form>
-              <fieldset className="form-group p-3">
-                <ErrorMessage
-                  name="name"
-                  component="div"
-                  className="alert alert-warning"
-                />
-                <label className="form-label">Full Name*</label>
-                <Field type="text" className="form-control" name="name" />
-              </fieldset>
-              <fieldset className="form-group p-3">
-                <ErrorMessage
-                  name="age"
-                  component="div"
-                  className="alert alert-warning"
-                />
-                <label className="form-label">Age*</label>
-                <Field type="number" className="form-control" name="age" />
-              </fieldset>
-              <fieldset className="form-group p-3">
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  className="alert alert-warning"
-                />
-                <label className="form-label">Email*</label>
-                <Field type="text" className="form-control" name="email" />
-              </fieldset>
-              <fieldset className="form-group p-3">
-                <ErrorMessage
-                  name="gender"
-                  component="div"
-                  className="alert alert-warning"
-                />
-                <label className="form-label">Gender*</label>
-                <Field
-                  className="form-control"
-                  as="select"
-                  id="gender"
-                  name="gender"
-                >
-                  <option value="">Select gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </Field>
-              </fieldset>
+              <div className="row">
+                <div className="col">
+                  <fieldset className="form-group p-3">
+                    <ErrorMessage
+                      name="name"
+                      component="div"
+                      className="alert alert-warning text-center"
+                    />
+                    <label className="form-label">Full Name*</label>
+                    <Field type="text" className="form-control" name="name" />
+                  </fieldset>
+                  <fieldset className="form-group p-3">
+                    <ErrorMessage
+                      name="age"
+                      component="div"
+                      className="alert alert-warning text-center"
+                    />
+                    <label className="form-label">Age*</label>
+                    <Field type="number" className="form-control" name="age" />
+                  </fieldset>
+                  <fieldset className="form-group p-3">
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="alert alert-warning text-center"
+                    />
+                    <label className="form-label">Email*</label>
+                    <Field type="text" className="form-control" name="email" />
+                  </fieldset>
+                  <fieldset className="form-group p-3">
+                    <ErrorMessage
+                      name="gender"
+                      component="div"
+                      className="alert alert-warning text-center"
+                    />
+                    <label className="form-label">Gender*</label>
+                    <Field
+                      className="form-control"
+                      as="select"
+                      id="gender"
+                      name="gender"
+                    >
+                      <option value="">Select gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </Field>
+                  </fieldset>
 
-              <fieldset className="form-group p-3">
-                <ErrorMessage
-                  name="dob"
-                  component="div"
-                  className="alert alert-warning"
-                />
-                <label className="form-label">Date of Birth*</label>
-                <Field type="date" className="form-control" name="dob" />
-              </fieldset>
-              <fieldset className="form-group p-3">
-                <ErrorMessage
-                  name="location"
-                  component="div"
-                  className="alert alert-warning"
-                />
-                <label className="form-label">Location*</label>
-                <Field type="text" className="form-control" name="location" />
-              </fieldset>
-              <fieldset className="form-group p-3">
-                <ErrorMessage
-                  name="resumeLink"
-                  component="div"
-                  className="alert alert-warning"
-                />
-                <label className="form-label">Resume Link*</label>
-                <Field type="text" className="form-control" name="resumeLink" />
-              </fieldset>
+                  <fieldset className="form-group p-3">
+                    <ErrorMessage
+                      name="dob"
+                      component="div"
+                      className="alert alert-warning text-center"
+                    />
+                    <label className="form-label">Date of Birth*</label>
+                    <Field type="date" className="form-control" name="dob" />
+                  </fieldset>
+                  <fieldset className="form-group p-3">
+                    <ErrorMessage
+                      name="location"
+                      component="div"
+                      className="alert alert-warning text-center"
+                    />
+                    <label className="form-label">Location*</label>
+                    <Field
+                      type="text"
+                      className="form-control"
+                      name="location"
+                    />
+                  </fieldset>
+                  <fieldset className="form-group p-3">
+                    <ErrorMessage
+                      name="resumeLink"
+                      component="div"
+                      className="alert alert-warning text-center"
+                    />
+                    <label className="form-label">Resume Link*</label>
+                    <Field
+                      type="text"
+                      className="form-control"
+                      name="resumeLink"
+                    />
+                  </fieldset>
+                </div>
+                <div className="col">
+                  <fieldset className="form-group p-3">
+                    {usernameAlreadyExists && (
+                      <div className="alert alert-warning text-center">
+                        Username Already Exists
+                      </div>
+                    )}
+                    <ErrorMessage
+                      name="username"
+                      component="div"
+                      className="alert alert-warning text-center"
+                    />
+
+                    <label className="form-label">Username*</label>
+                    <Field
+                      type="text"
+                      className="form-control"
+                      name="username"
+                    />
+                  </fieldset>
+                  <fieldset className="form-group p-3">
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className="alert alert-warning text-center"
+                    />
+                    <label className="form-label">Password*</label>
+                    <Field
+                      type="password"
+                      className="form-control"
+                      name="password"
+                    />
+                  </fieldset>
+                  <fieldset className="form-group p-3">
+                    <ErrorMessage
+                      name="confirmPassword"
+                      component="div"
+                      className="alert alert-warning text-center"
+                    />
+                    <label className="form-label">Confirm Password*</label>
+                    <Field
+                      type="password"
+                      className="form-control"
+                      name="confirmPassword"
+                    />
+                  </fieldset>
+
+                  {!isRegistered && (
+                    <div className="text-center">
+                      <button
+                        className="btn btn-primary"
+                        type="submit"
+                        disabled={isSubmitting}
+                      >
+                        Create Account
+                      </button>
+                    </div>
+                  )}
+                  {isRegistered && (
+                    <fieldset className="form-group p-3">
+                      <div className="alert alert-success form-group text-center">
+                        <span className="p-5">
+                          Account registeration successful!
+                        </span>
+                        <Link to="/jobseeker/login" className="btn btn-primary">
+                          Login Here!
+                        </Link>
+                      </div>
+                    </fieldset>
+                  )}
+                </div>
+              </div>
+
               <hr className="border border-success border-3 opacity-75"></hr>
-              <fieldset className="form-group p-3">
-                <ErrorMessage
-                  name="username"
-                  component="div"
-                  className="alert alert-warning"
-                />
-
-                <label className="form-label">Username*</label>
-                <Field type="text" className="form-control" name="username" />
-              </fieldset>
-              <fieldset className="form-group p-3">
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className="alert alert-warning"
-                />
-                <label className="form-label">Password*</label>
-                <Field
-                  type="password"
-                  className="form-control"
-                  name="password"
-                />
-              </fieldset>
-
-              {!isRegistered && (
-                <button
-                  className="btn btn-primary"
-                  type="submit"
-                  disabled={isSubmitting}
-                >
-                  Create Account
-                </button>
-              )}
-              {isRegistered && (
-                <fieldset className="form-group p-3">
-                  <div className="alert alert-success form-group">
-                    <span className="p-5">
-                      Account registeration successful!
-                    </span>
-                    <Link to="/jobseeker/login" className="btn btn-primary">
-                      Login Here!
-                    </Link>
-                  </div>
-                </fieldset>
-              )}
             </Form>
           )}
         </Formik>

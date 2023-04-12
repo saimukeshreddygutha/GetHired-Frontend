@@ -22,3 +22,7 @@ export const executeBasicAuthenticationService = (token) =>
 
   export const getJobSeekerId = (username) =>
     apiClient.get(`jobseeker/get-id/${username}`);
+
+  export const usernameApi = (username) => apiClient.get(`user/${username}`);
+
+  
