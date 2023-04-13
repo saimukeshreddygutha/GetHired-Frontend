@@ -20,15 +20,15 @@ export default function HeaderComponent() {
             <ul className="navbar-nav">
               {isAuthenticated && (
                 <li className="nav-item">
-                  <Link className="nav-link" to="/welcome/sai">
-                    Home
+                  <Link className="nav-link" to="/jobseeker/dashboard">
+                    <span className="brand"> Dashboard</span>
                   </Link>
                 </li>
               )}
               {isAuthenticated && (
                 <li className="nav-item">
                   <Link className="nav-link" to="/todos">
-                    Todos
+                    <span className="brand">Todos</span>
                   </Link>
                 </li>
               )}
@@ -38,8 +38,26 @@ export default function HeaderComponent() {
             {isAuthenticated && (
               <li className="nav-item">
                 <Link className="nav-link" to="/logout" onClick={logout}>
-                  Logout
+                  <span className="brand">Logout</span>
                 </Link>
+              </li>
+            )}
+            {!isAuthenticated && (
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                >
+                  <span className="brand">Register</span>
+                </a>
+                <div className="dropdown-menu">
+                  <Link className="dropdown-item" to="/jobseeker/register">
+                    JobSeeker
+                  </Link>
+                  <Link className="dropdown-item" to="/recruiter/register">
+                    Recruiter
+                  </Link>
+                </div>
               </li>
             )}
             {!isAuthenticated && (

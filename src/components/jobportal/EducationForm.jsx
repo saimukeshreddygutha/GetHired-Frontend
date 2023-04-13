@@ -1,15 +1,35 @@
 import React, { useState } from "react";
 import { Formik, Field, FieldArray, Form } from "formik";
+import { addEduApi } from "./api/JobPortalAPIService";
+import { useAuth } from "./security/AuthContext";
+import { error } from "jquery";
 function EducationForm() {
+  const authContext = useAuth();
+  const username = authContext.username;
+  const userId = authContext.userId;
   const [isPursuing, setIsPursuing] = useState(false);
+  const [isAdded, setAdded] = useState(false);
+
+  async function onSubmit(values) {
+    await addEduApi(values.educations, username)
+      .then((response) => {
+        if (response.status == 201) setAdded(true);
+        else setAdded(false);
+      })
+      .catch((error) => console.log(error));
+  }
   function validate(values) {
-    console.log(values);
     const errors = {};
     return errors;
   }
   return (
     <div className="container my-5 pb-5">
       <h1>Education Form</h1>
+      {isAdded && (
+        <div className="alert alert-success">
+          Successfully added update your education details
+        </div>
+      )}
       <Formik
         initialValues={{
           educations: [
@@ -20,15 +40,12 @@ function EducationForm() {
               cgpa: 0,
               startDate: "",
               endDate: "",
-              sem: 0,
             },
           ],
         }}
         validateOnBlur={true}
         validate={validate}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={onSubmit}
       >
         {({ values }) => (
           <Form>
@@ -80,14 +97,6 @@ function EducationForm() {
                           name={`educations[${index}].endDate`}
                         />
                       </div>
-                      <div className="form-group">
-                        <label>Semester:</label>
-                        <Field
-                          className="form-control"
-                          type="number"
-                          name={`educations[${index}].sem`}
-                        />
-                      </div>
                       <div className="form-group pb-4">
                         <label>CGPA:</label>
                         <Field
@@ -116,7 +125,6 @@ function EducationForm() {
                         cgpa: 0,
                         startDate: "",
                         endDate: "",
-                        sem: 0,
                       })
                     }
                   >

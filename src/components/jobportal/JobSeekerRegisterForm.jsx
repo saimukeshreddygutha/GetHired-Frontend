@@ -7,6 +7,7 @@ import {
 } from "./api/JobPortalAPIService";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "./security/AuthContext";
 
 export default function JobSeekerRegisterComponent() {
   const [isRegistered, setRegistered] = useState(false);
@@ -34,6 +35,8 @@ export default function JobSeekerRegisterComponent() {
         gender: values.gender,
         dateOfBirth: values.dob,
         location: values.location,
+        resumeLink: values.resumeLink,
+        username: values.username,
       };
 
       let user = {
@@ -43,22 +46,25 @@ export default function JobSeekerRegisterComponent() {
       };
       console.log(jobseeker);
       console.log(user);
-      const jobseekerAdded = true;
-      const usercreated = true;
+      let jobseekerAdded = false;
+      let usercreated = false;
 
-      addUserApi(user)
+      await addUserApi(user)
         .then((response) => {
           console.log(response);
-          if (response.status == 204) usercreated = true;
+          if (response.status == 201) usercreated = true;
         })
         .catch((error) => console.log(error));
 
-      addJobseekerApi(jobseeker)
-        .then((response) => {
-          console.log(response);
-          if (response.status == 201) jobseekerAdded = true;
-        })
-        .catch((error) => console.log(error));
+      console.log(usercreated);
+
+      if (usercreated)
+        await addJobseekerApi(jobseeker)
+          .then((response) => {
+            console.log(response);
+            if (response.status == 201) jobseekerAdded = true;
+          })
+          .catch((error) => console.log(error));
 
       if (jobseekerAdded && usercreated) setRegistered(true);
     }

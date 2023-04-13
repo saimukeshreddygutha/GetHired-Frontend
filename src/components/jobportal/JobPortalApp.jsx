@@ -26,6 +26,24 @@ function AuthenticatedRoute({ children }) {
   return <Navigate to="/login" />;
 }
 
+function JSAuthenticatedRoute({ children }) {
+  const authContext = useAuth();
+  if (authContext.isAuthenticated && authContext.role === "JOBSEEKER") {
+    return children;
+  }
+
+  return <Navigate to="/jobseeker/login" />;
+}
+
+function RCAuthenticatedRoute({ children }) {
+  const authContext = useAuth();
+  if (authContext.isAuthenticated && authContext.role === "RECRUITER") {
+    return children;
+  }
+
+  return <Navigate to="/recruiter/login" />;
+}
+
 export default function JobPortalApp() {
   return (
     <AuthProvider>
@@ -48,7 +66,11 @@ export default function JobPortalApp() {
             />
             <Route
               path="/jobseeker/dashboard"
-              element={<JobSeekerDashboard />}
+              element={
+                <JSAuthenticatedRoute>
+                  <JobSeekerDashboard />
+                </JSAuthenticatedRoute>
+              }
             />
             <Route
               path="/recruiter/:username/applications"
@@ -67,8 +89,22 @@ export default function JobPortalApp() {
               path="/recruiter/:username/job/add"
               element={<JobAdComponent />}
             />
-            <Route path="/jobseeker/exp" element={<ExperienceForm />} />
-            <Route path="/jobseeker/edu" element={<EducationForm />} />
+            <Route
+              path="/jobseeker/:username/exp/add"
+              element={
+                <JSAuthenticatedRoute>
+                  <ExperienceForm />
+                </JSAuthenticatedRoute>
+              }
+            />
+            <Route
+              path="/jobseeker/:username/edu/add"
+              element={
+                <JSAuthenticatedRoute>
+                  <EducationForm />
+                </JSAuthenticatedRoute>
+              }
+            />
             <Route path="/job-ads" element={<RecruiterDashboard />} />
           </Routes>
         </div>

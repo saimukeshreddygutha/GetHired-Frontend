@@ -31,8 +31,9 @@ export default function AuthProvider({ children }) {
           config.headers.Authorization = baToken;
           return config;
         });
-        const userId = await getJobSeekerId(username);
-        setUserId(userId);
+        const response = await getJobSeekerId(username);
+        setUserId(parseInt(response.data));
+        console.log(userId);
         return true;
       } else {
         logout();

@@ -1,14 +1,34 @@
 import React, { useState } from "react";
 import { Formik, Field, FieldArray, Form } from "formik";
+import { useAuth } from "./security/AuthContext";
+import { addExpApi } from "./api/JobPortalAPIService";
+import { error } from "jquery";
 function ExperienceForm() {
-  function validate(values) {
+  const authContext = useAuth();
+  const username = authContext.username;
+  const userId = authContext.userId;
+  const [isAdded, setAdded] = useState(false);
+
+  async function onSubmit(values) {
     console.log(values);
+
+    await addExpApi(values.experiences, username)
+      .then((response) => {
+        if (response.status == 201) setAdded(true);
+      })
+      .catch((error) => console.log(error));
+  }
+  function validate(values) {
     const errors = {};
     return errors;
   }
   return (
     <div className="container my-5 pb-5">
       <h1>Experience</h1>
+
+      {isAdded && (
+        <div className="alert alert-success">Experience added Successfully</div>
+      )}
       <Formik
         initialValues={{
           experiences: [
@@ -24,9 +44,7 @@ function ExperienceForm() {
         }}
         validateOnBlur={true}
         validate={validate}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={onSubmit}
       >
         {({ values }) => (
           <Form>
