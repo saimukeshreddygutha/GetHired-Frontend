@@ -46,19 +46,19 @@ export default function JobSeekerRegisterComponent() {
       const jobseekerAdded = true;
       const usercreated = true;
 
-      // addUserApi(user)
-      //   .then((response) => {
-      //     console.log(response);
-      //     if (response.status == 204) usercreated = true;
-      //   })
-      //   .catch((error) => console.log(error));
+      addUserApi(user)
+        .then((response) => {
+          console.log(response);
+          if (response.status == 204) usercreated = true;
+        })
+        .catch((error) => console.log(error));
 
-      // addJobseekerApi(jobseeker)
-      //   .then((response) => {
-      //     console.log(response);
-      //     if (response.status == 201) jobseekerAdded = true;
-      //   })
-      //   .catch((error) => console.log(error));
+      addJobseekerApi(jobseeker)
+        .then((response) => {
+          console.log(response);
+          if (response.status == 201) jobseekerAdded = true;
+        })
+        .catch((error) => console.log(error));
 
       if (jobseekerAdded && usercreated) setRegistered(true);
     }
@@ -215,7 +215,7 @@ export default function JobSeekerRegisterComponent() {
                   <fieldset className="form-group p-3">
                     {usernameAlreadyExists && (
                       <div className="alert alert-warning text-center">
-                        Username Already Exists
+                        Username Already Taken
                       </div>
                     )}
                     <ErrorMessage

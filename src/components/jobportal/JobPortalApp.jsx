@@ -4,18 +4,19 @@ import HeaderComponent from "./HeaderComponent";
 import FooterComponent from "./FooterComponent";
 import { useAuth } from "./security/AuthContext";
 import IntroComponent from "./IntroComponent";
-import JobSeekerRegisterComponent from "./JobSeekerRegisterComponent";
+import JobSeekerRegisterComponent from "./JobSeekerRegisterForm";
 import { JobSeekerLoginComponent } from "./LoginForm";
 import HomeComponent from "./HomeComponent";
 import EducationForm from "./EducationForm";
 import { RecruiterLoginComponent } from "./LoginForm";
 import ExperienceForm from "./ExperienceForm";
-import RecruiterRegisterComponent from "./RecruiterRegisterComponent";
+import RecruiterRegisterComponent from "./RecruiterRegisterForm";
 import { AdminLoginComponent } from "./LoginForm";
 import JobAdComponent from "./JobAdForm";
 import RecruiterDashboard from "./RecruiterDashboard";
 import ViewApplication from "./ViewApplication";
 import ViewJobAdComponent from "./ViewJobAdComponent";
+import JobSeekerDashboard from "./JobSeekerDashboard";
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth();
   if (authContext.isAuthenticated) {
@@ -45,7 +46,14 @@ export default function JobPortalApp() {
               path="/jobseeker/login"
               element={<JobSeekerLoginComponent />}
             />
-            <Route path="/jobseeker/dashboard" element={<ViewApplication />} />
+            <Route
+              path="/jobseeker/dashboard"
+              element={<JobSeekerDashboard />}
+            />
+            <Route
+              path="/recruiter/:username/applications"
+              element={<ViewApplication />}
+            />
             <Route
               path="/recruiter/dashboard"
               element={<ViewJobAdComponent />}
