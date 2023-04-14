@@ -4,7 +4,7 @@ import { useAuth } from "./security/AuthContext";
 export default function HeaderComponent() {
   const authContext = useAuth();
   const isAuthenticated = authContext.isAuthenticated;
-
+  const role = authContext.role;
   function logout() {
     authContext.logout();
   }
@@ -20,15 +20,8 @@ export default function HeaderComponent() {
             <ul className="navbar-nav">
               {isAuthenticated && (
                 <li className="nav-item">
-                  <Link className="nav-link" to="/jobseeker/dashboard">
+                  <Link className="nav-link" to={`/${role}/dashboard`}>
                     <span className="brand"> Dashboard</span>
-                  </Link>
-                </li>
-              )}
-              {isAuthenticated && (
-                <li className="nav-item">
-                  <Link className="nav-link" to="/todos">
-                    <span className="brand">Todos</span>
                   </Link>
                 </li>
               )}

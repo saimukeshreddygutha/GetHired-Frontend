@@ -12,11 +12,12 @@ import { RecruiterLoginComponent } from "./LoginForm";
 import ExperienceForm from "./ExperienceForm";
 import RecruiterRegisterComponent from "./RecruiterRegisterForm";
 import { AdminLoginComponent } from "./LoginForm";
-import JobAdComponent from "./JobAdForm";
+import JobAdForm from "./JobAdForm";
 import RecruiterDashboard from "./RecruiterDashboard";
 import ViewApplication from "./ViewApplication";
 import ViewJobAdComponent from "./ViewJobAdComponent";
 import JobSeekerDashboard from "./JobSeekerDashboard";
+import LogoutComponent from "./LogoutComponent";
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth();
   if (authContext.isAuthenticated) {
@@ -28,7 +29,7 @@ function AuthenticatedRoute({ children }) {
 
 function JSAuthenticatedRoute({ children }) {
   const authContext = useAuth();
-  if (authContext.isAuthenticated && authContext.role === "JOBSEEKER") {
+  if (authContext.isAuthenticated && authContext.role === "jobseeker") {
     return children;
   }
 
@@ -37,7 +38,7 @@ function JSAuthenticatedRoute({ children }) {
 
 function RCAuthenticatedRoute({ children }) {
   const authContext = useAuth();
-  if (authContext.isAuthenticated && authContext.role === "RECRUITER") {
+  if (authContext.isAuthenticated && authContext.role === "recruiter") {
     return children;
   }
 
@@ -78,7 +79,11 @@ export default function JobPortalApp() {
             />
             <Route
               path="/recruiter/dashboard"
-              element={<ViewJobAdComponent />}
+              element={
+                <RCAuthenticatedRoute>
+                  <RecruiterDashboard />
+                </RCAuthenticatedRoute>
+              }
             />
             <Route path="/admin/login" element={<AdminLoginComponent />} />
             <Route
@@ -87,7 +92,11 @@ export default function JobPortalApp() {
             />
             <Route
               path="/recruiter/:username/job/add"
-              element={<JobAdComponent />}
+              element={
+                <RCAuthenticatedRoute>
+                  <JobAdForm />
+                </RCAuthenticatedRoute>
+              }
             />
             <Route
               path="/jobseeker/:username/exp/add"
@@ -105,7 +114,25 @@ export default function JobPortalApp() {
                 </JSAuthenticatedRoute>
               }
             />
+            <Route
+              path="/recruiter/:username/jobad/view/:id"
+              element={
+                <RCAuthenticatedRoute>
+                  <ViewJobAdComponent />
+                </RCAuthenticatedRoute>
+              }
+            />
+            <Route
+              path="/jobseeker/:username/jobad/view/:id"
+              element={
+                <JSAuthenticatedRoute>
+                  <ViewJobAdComponent />
+                </JSAuthenticatedRoute>
+              }
+            />
             <Route path="/job-ads" element={<RecruiterDashboard />} />
+
+            <Route path="/logout" element={<LogoutComponent />} />
           </Routes>
         </div>
         <FooterComponent />

@@ -1,19 +1,23 @@
+import { useEffect, useState } from "react";
 import { ViewComponent } from "./ViewApplication";
+import { useParams } from "react-router-dom";
+import { useAuth } from "./security/AuthContext";
+import { getJobAd } from "./api/JobPortalAPIService";
 
 function ViewJobAdComponent() {
-  const jobAd = {
-    jobId: "jobId",
-    companyName: "companyName",
-    recruiterId: "recruiterId",
-    description: "description",
-    roleName: "roleName",
-    location: "location",
-    createdDate: "createdDate",
-    packageDetails: "packageDetails",
-    experienceRequired: "experienceRequired",
-    skillsRequired: "skillsRequired",
-    recruiterUsername: "recruiterUsername",
-  };
+  const authContext = useAuth();
+  const username = authContext.username;
+  const userId = authContext.userId;
+  const [jobAd, setJobAd] = useState([]);
+  const { id } = useParams();
+  useEffect(() => retrieveJobAd(), []);
+  function retrieveJobAd() {
+    getJobAd(id)
+      .then((response) => {
+        setJobAd(response.data);
+      })
+      .catch((error) => console.log(error));
+  }
   return (
     <div className="container w-75">
       <div className="container pb-4">
@@ -32,7 +36,7 @@ function ViewJobAdComponent() {
             data={jobAd.experienceRequired}
           />
           <ViewComponent
-            header="jobSeekerResumeLink"
+            header="recruiterUsername"
             data={jobAd.recruiterUsername}
           />
         </div>

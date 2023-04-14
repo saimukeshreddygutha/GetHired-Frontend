@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "./security/AuthContext";
+import { useState, useEffect } from "react";
+import { getAllJobAds } from "./api/JobPortalAPIService";
+import JobAdsTable from "./JobAdsTable";
 
 function JobSeekerDashboard() {
   const authContext = useAuth();
   const username = authContext.username;
   const jobSeekerId = authContext.userId;
+  useEffect(() => retrieveAllApplications(), [username]);
+  const [jobAds, setjobAds] = useState([]);
+  function retrieveAllApplications() {
+    getAllJobAds(username).then((response) => setjobAds(response.data));
+  }
   function getApplicationsForJobSeeker() {}
   return (
     <div className="container">
@@ -19,6 +27,7 @@ function JobSeekerDashboard() {
         Add Experience
       </Link>
       <h3>Available Jobs:</h3>
+      <JobAdsTable jobAds={jobAds} />
     </div>
   );
 }

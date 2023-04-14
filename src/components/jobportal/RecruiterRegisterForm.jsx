@@ -1,5 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { addUserApi, usernameApi } from "./api/JobPortalAPIService";
+import {
+  addRecruiter,
+  addUserApi,
+  usernameApi,
+} from "./api/JobPortalAPIService";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -38,8 +42,23 @@ function RecruiterRegisterComponent() {
       };
       console.log(recruiter);
       console.log(user);
-      const recruiterAdded = true;
-      const usercreated = true;
+      let recruiterAdded = false;
+      let usercreated = false;
+
+      await addUserApi(user)
+        .then((response) => {
+          console.log(response);
+          if (response.status == 201) usercreated = true;
+        })
+        .catch((error) => console.log(error));
+
+      if (usercreated)
+        await addRecruiter(recruiter)
+          .then((response) => {
+            console.log(response);
+            if (response.status == 201) recruiterAdded = true;
+          })
+          .catch((error) => console.log(error));
       if (recruiterAdded && usercreated) setRegistered(true);
     }
   }

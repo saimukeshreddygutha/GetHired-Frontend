@@ -3,6 +3,7 @@ import {
   apiClient,
   executeBasicAuthenticationService,
   getJobSeekerId,
+  getRecruiterId,
 } from "../api/JobPortalAPIService";
 
 export const AuthContext = createContext();
@@ -31,9 +32,16 @@ export default function AuthProvider({ children }) {
           config.headers.Authorization = baToken;
           return config;
         });
-        const response = await getJobSeekerId(username);
-        setUserId(parseInt(response.data));
-        console.log(userId);
+
+        if (role == "jobseeker") {
+          const response = await getJobSeekerId(username);
+          setUserId(parseInt(response.data));
+          console.log(userId);
+        } else if (role == "recruiter") {
+          const response = await getRecruiterId(username);
+          setUserId(parseInt(response.data));
+          console.log(userId);
+        }
         return true;
       } else {
         logout();
