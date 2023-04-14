@@ -23,7 +23,7 @@ function EducationForm() {
     return errors;
   }
   return (
-    <div className="container my-5 pb-5">
+    <div className="container my-5 pb-5 w-50">
       <h1>Education Form</h1>
       {isAdded && (
         <div className="alert alert-success">
@@ -53,7 +53,7 @@ function EducationForm() {
               {({ push, remove }) => (
                 <div>
                   {values.educations.map((_, index) => (
-                    <div key={index}>
+                    <div className="mt-4" key={index}>
                       <h3>Education {index + 1}</h3>
                       <div className="form-group">
                         <label>Institute Name:</label>
@@ -106,7 +106,7 @@ function EducationForm() {
                         />
                       </div>
                       <button
-                        className="btn btn-danger mx-5"
+                        className="btn btn-danger"
                         type="button"
                         onClick={() => remove(index)}
                       >
@@ -114,28 +114,32 @@ function EducationForm() {
                       </button>
                     </div>
                   ))}
-                  <button
-                    className="btn btn-success my-3"
-                    type="button"
-                    onClick={() =>
-                      push({
-                        instituteName: "",
-                        program: "",
-                        branch: "",
-                        cgpa: 0,
-                        startDate: "",
-                        endDate: "",
-                      })
-                    }
-                  >
-                    Add Education
-                  </button>
+                  <div className="">
+                    <button
+                      className="btn btn-success my-3"
+                      type="button"
+                      onClick={() =>
+                        push({
+                          instituteName: "",
+                          program: "",
+                          branch: "",
+                          cgpa: 0,
+                          startDate: "",
+                          endDate: "",
+                        })
+                      }
+                    >
+                      Add Education
+                    </button>
+                  </div>
                 </div>
               )}
             </FieldArray>
-            <button className="btn btn-primary" type="submit">
-              Submit
-            </button>
+            <div className="text-center">
+              <button className="btn btn-primary" type="submit">
+                Submit
+              </button>
+            </div>
           </Form>
         )}
       </Formik>

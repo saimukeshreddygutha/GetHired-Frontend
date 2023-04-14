@@ -18,24 +18,14 @@ function RecruiterDashboard() {
       })
       .catch((error) => console.log(error));
   }
-  const jobApplications = [
-    {
-      id: "",
-      jobSeekerResumeLink: "",
-      jobSeekerEmail: "",
-      jobSeekerGender: "",
-      jobSeekerAge: "",
-      jobSeekerFullName: "",
-      jobSeekerEmail: "",
-      location: "",
-    },
-  ];
+  
   return (
     <div className="container">
-      <h1>Recruiter Dashboard</h1>
+      <h1 className="text-center">Welcome {username}</h1>
+      <h4 className="text-center">Recruiter Dashboard</h4>
       <h3>Your Job Ads: </h3>
       <JobAdsTable jobAds={jobAds} />
-      {/* <JobApplicationsTable jobApplications={jobApplications} /> */}
+
       <div className="text-center">
         <Link
           className="btn btn-success text-center"

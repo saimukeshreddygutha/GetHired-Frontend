@@ -23,20 +23,20 @@ function ViewJobAdComponent() {
       <div className="container pb-4">
         <h3>Job Description</h3>
         <div className="container">
-          <ViewComponent header="jobId" data={jobAd.jobId} />
-          <ViewComponent header="companyName" data={jobAd.companyName} />
-          <ViewComponent header="location" data={jobAd.location} />
-          <ViewComponent header="description" data={jobAd.description} />
-          <ViewComponent header="roleName" data={jobAd.roleName} />
-          <ViewComponent header="createdDate" data={jobAd.createdDate} />
-          <ViewComponent header="packageDetails" data={jobAd.packageDetails} />
-          <ViewComponent header="skillsRequired" data={jobAd.skillsRequired} />
+          <ViewComponent header="Job Id" data={jobAd.jobId} />
+          <ViewComponent header="Company Name" data={jobAd.companyName} />
+          <ViewComponent header="Location" data={jobAd.location} />
+          <ViewComponent header="Description" data={jobAd.description} />
+          <ViewComponent header="Role Name" data={jobAd.roleName} />
+          <ViewComponent header="Created Date" data={jobAd.createdDate} />
+          <ViewComponent header="PackageDetails" data={jobAd.packageDetails} />
+          <ViewComponent header="SkillsRequired" data={jobAd.skillsRequired} />
           <ViewComponent
-            header="experienceRequired"
+            header="Experience Required"
             data={jobAd.experienceRequired}
           />
           <ViewComponent
-            header="recruiterUsername"
+            header="Recruiter Username"
             data={jobAd.recruiterUsername}
           />
         </div>

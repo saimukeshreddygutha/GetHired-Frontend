@@ -31,7 +31,7 @@ export const getEduApi = (username) =>
   apiClient.get(`jobseeker/${username}/edu/get`);
 
 export const getAllJobAds = (username) =>
-  apiClient.get(`jobseeker/${username}/jobads`);
+  apiClient.get(`jobseeker/${username}/jobads/all`);
 
 export const addRecruiter = (recruiter) =>
   apiClient.post("/recruiter/add", recruiter);
@@ -46,3 +46,12 @@ export const getRecruiterJobAds = (username) =>
   apiClient.get(`recruiter/${username}/jobads/all`);
 
 export const getJobAd = (id) => apiClient.get(`jobads/get/${id}`);
+
+export const applyForJob = (username, id) =>
+  apiClient.post(`/jobseeker/${username}/jobads/${id}/apply`);
+
+export const getJobApplicationsByJobId = (username, id) =>
+  apiClient.get(`recruiter/${username}/applications/jobad/${id}`);
+
+export const getApplicationByApplicationId = (username, id) =>
+  apiClient.get(`recruiter/${username}/application/${id}`);

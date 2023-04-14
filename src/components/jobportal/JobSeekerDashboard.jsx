@@ -16,16 +16,20 @@ function JobSeekerDashboard() {
   function getApplicationsForJobSeeker() {}
   return (
     <div className="container">
-      <h1>JobSeeker Dashboard</h1>
-      <Link
-        className="btn btn-success me-5"
-        to={`/jobseeker/${username}/edu/add`}
-      >
-        Add Education
-      </Link>
-      <Link className="btn btn-success" to={`/jobseeker/${username}/exp/add`}>
-        Add Experience
-      </Link>
+      <h1 className="text-center">Welcome {username}!</h1>
+      <h4 className="text-center mb-5">JobSeeker Dashboard</h4>
+      <div className="text-center">
+        <Link
+          className="btn btn-success me-5"
+          to={`/jobseeker/${username}/edu/add`}
+        >
+          Add/Edit Education
+        </Link>
+        <Link className="btn btn-success" to={`/jobseeker/${username}/exp/add`}>
+          Add/Edit Experience
+        </Link>
+      </div>
+
       <h3>Available Jobs:</h3>
       <JobAdsTable jobAds={jobAds} />
     </div>

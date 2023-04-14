@@ -85,20 +85,26 @@ function LoginForm({ role, onSuccess }) {
 export function RecruiterLoginComponent() {
   const navigate = useNavigate();
   return (
-    <LoginForm
-      role="recruiter"
-      onSuccess={() => navigate("/recruiter/dashboard")}
-    />
+    <div className="container">
+      <h3 className="text-center pb-4">Login page for Recruiter</h3>
+      <LoginForm
+        role="recruiter"
+        onSuccess={() => navigate("/recruiter/dashboard")}
+      />
+    </div>
   );
 }
 
 export function JobSeekerLoginComponent() {
   const navigate = useNavigate();
   return (
-    <LoginForm
-      role="jobseeker"
-      onSuccess={() => navigate("/jobseeker/dashboard")}
-    />
+    <div className="container">
+      <h3 className="text-center pb-4">Login page for JobSeeker</h3>
+      <LoginForm
+        role="jobseeker"
+        onSuccess={() => navigate("/jobseeker/dashboard")}
+      />
+    </div>
   );
 }
 

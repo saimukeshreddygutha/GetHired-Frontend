@@ -1,5 +1,24 @@
-function JobApplicationsTable(props) {
-  const { jobApplications } = props;
+import { useEffect, useState } from "react";
+import { useAuth } from "./security/AuthContext";
+import { useParams, Link } from "react-router-dom";
+import { getJobApplicationsByJobId } from "./api/JobPortalAPIService";
+
+function JobApplicationsTable() {
+  const [jobApplications, setJobApplications] = useState([]);
+  const authContext = useAuth();
+  const { id } = useParams();
+  const username = authContext.username;
+  const userId = authContext.userId;
+
+  useEffect(() => retrieveJobApplicationsById(), [id]);
+
+  function retrieveJobApplicationsById() {
+    getJobApplicationsByJobId(username, id)
+      .then((response) => {
+        if (response.status == 200) setJobApplications(response.data);
+      })
+      .catch((error) => console.log(error));
+  }
   return (
     <table className="table table-bordered table-striped">
       <thead>
@@ -10,6 +29,7 @@ function JobApplicationsTable(props) {
           <th>Email</th>
           <th>Location</th>
           <th>Resume Link</th>
+          <th>View Application</th>
         </tr>
       </thead>
       <tbody>
@@ -19,8 +39,15 @@ function JobApplicationsTable(props) {
             <td>{jobApplication.jobSeekerAge}</td>
             <td>{jobApplication.jobSeekerGender}</td>
             <td>{jobApplication.jobSeekerEmail}</td>
-            <td>{jobApplication.location}</td>
+            <td>{jobApplication.jobSeekerLocation}</td>
             <td>{jobApplication.jobSeekerResumeLink}</td>
+            <td>
+              <Link
+                to={`/recruiter/${username}/application/view/${jobApplication.id}`}
+              >
+                <button className="btn btn-primary">View Application</button>
+              </Link>
+            </td>
           </tr>
         ))}
       </tbody>

@@ -23,7 +23,7 @@ function ExperienceForm() {
     return errors;
   }
   return (
-    <div className="container my-5 pb-5">
+    <div className="container my-5 pb-5 w-50">
       <h1>Experience</h1>
 
       {isAdded && (
@@ -52,7 +52,7 @@ function ExperienceForm() {
               {({ push, remove }) => (
                 <div>
                   {values.experiences.map((_, index) => (
-                    <div key={index}>
+                    <div className="mt-4" key={index}>
                       <h3>Experience {index + 1}</h3>
                       <div className="form-group">
                         <label>Company Name</label>
@@ -88,7 +88,7 @@ function ExperienceForm() {
                         />
                       </div>
 
-                      <div className="form-group">
+                      <div className="form-group pb-4">
                         <label>End Date:</label>
                         <Field
                           className="form-control"
@@ -98,7 +98,7 @@ function ExperienceForm() {
                       </div>
 
                       <button
-                        className="btn btn-danger mx-5"
+                        className="btn btn-danger"
                         type="button"
                         onClick={() => remove(index)}
                       >
@@ -125,9 +125,11 @@ function ExperienceForm() {
                 </div>
               )}
             </FieldArray>
-            <button className="btn btn-primary" type="submit">
-              Submit
-            </button>
+            <div className="text-center">
+              <button className="btn btn-primary" type="submit">
+                Submit
+              </button>
+            </div>
           </Form>
         )}
       </Formik>

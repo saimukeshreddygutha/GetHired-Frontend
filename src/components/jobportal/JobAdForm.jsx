@@ -131,13 +131,15 @@ function JobAdForm() {
                 <Field name="skillsRequired" component={MultilineTextInput} />
               </fieldset>
 
-              <button
-                className="btn btn-success"
-                type="submit"
-                disabled={isSubmitting}
-              >
-                Post Job
-              </button>
+              <div className="text-center">
+                <button
+                  className="btn btn-success"
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  Post Job
+                </button>
+              </div>
             </Form>
           )}
         </Formik>

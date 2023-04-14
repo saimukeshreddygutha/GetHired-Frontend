@@ -18,6 +18,7 @@ import ViewApplication from "./ViewApplication";
 import ViewJobAdComponent from "./ViewJobAdComponent";
 import JobSeekerDashboard from "./JobSeekerDashboard";
 import LogoutComponent from "./LogoutComponent";
+import JobApplicationsTable from "./JobApplicationsTable";
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth();
   if (authContext.isAuthenticated) {
@@ -74,8 +75,8 @@ export default function JobPortalApp() {
               }
             />
             <Route
-              path="/recruiter/:username/applications"
-              element={<ViewApplication />}
+              path="/recruiter/:username/applications/:id"
+              element={<RCAuthenticatedRoute><JobApplicationsTable /></RCAuthenticatedRoute>}
             />
             <Route
               path="/recruiter/dashboard"
@@ -89,6 +90,14 @@ export default function JobPortalApp() {
             <Route
               path="/recruiter/login"
               element={<RecruiterLoginComponent />}
+            />
+            <Route
+              path="/recruiter/:username/application/view/:id"
+              element={
+                <RCAuthenticatedRoute>
+                  <ViewApplication />
+                </RCAuthenticatedRoute>
+              }
             />
             <Route
               path="/recruiter/:username/job/add"

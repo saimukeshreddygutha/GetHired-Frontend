@@ -1,39 +1,23 @@
-function ViewApplication() {
-  const jobApplication = {
-    id: "id",
-    jobSeekerFullName: "jobSeekerFullName",
-    companyName: "companyName",
-    location: "location",
-    jobSeekerEmail: "email",
-    jobSeekerAge: "age",
-    jobSeekerGender: "gender",
-    jobSeekerResumeLink: "jobSeekerResumeLink",
-    educationList: ["1", "2", "3"],
-    experienceList: ["ex1", "ex2", "ex3"],
-  };
-  const educationList = [
-    {
-      instituteName: "instituteName",
-      program: "program",
-      branch: "branch",
-      cgpa: "cgpa",
-      startDate: "startDate",
-      endDate: "endDate",
-      sem: "sem",
-    },
-  ];
+import { useEffect, useState } from "react";
+import { useAuth } from "./security/AuthContext";
+import { useParams } from "react-router-dom";
+import { getApplicationByApplicationId } from "./api/JobPortalAPIService";
 
-  const experienceList = [
-    {
-      companyName: "companyName",
-      descriptionOfRole:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut volutpat diam vel est pretium tincidunt. Donec et orci ipsum. Vestibulum vestibulum purus sed risus accumsan suscipit. Curabitur finibus massa ac massa faucibus, sed rutrum ex vehicula. Donec pellentesque congue neque a finibus. Vivamus lectus est, aliquet nec porttitor sit amet, vestibulum eu erat. Vivamus id orci sit amet dui facilisis tristique",
-      designation: "designation",
-      isCurrentlyWorking: "isCurrentlyWorking",
-      startDate: "startDate",
-      endDate: "endDate",
-    },
-  ];
+function ViewApplication() {
+  const authContext = useAuth();
+  const username = authContext.username;
+  const userId = authContext.userId;
+  const { id } = useParams();
+  const [jobApplication, setJobApplication] = useState([]);
+  useEffect(() => retrieveJobApplication(), [id]);
+
+  function retrieveJobApplication() {
+    getApplicationByApplicationId(username, id)
+      .then((response) => setJobApplication(response.data))
+      .catch((error) => console.log(error));
+
+    console.log(jobApplication);
+  }
 
   return (
     <div className="container w-75">
@@ -42,26 +26,31 @@ function ViewApplication() {
         <div className="container">
           <ViewComponent header="ApplicationId" data={jobApplication.id} />
           <ViewComponent
-            header="jobSeekerFullName"
+            header="Full Name"
             data={jobApplication.jobSeekerFullName}
           />
-          <ViewComponent header="location" data={jobApplication.location} />
           <ViewComponent
-            header="jobSeekerEmail"
-            data={jobApplication.jobSeekerEmail}
+            header="Location"
+            data={jobApplication.jobSeekerLocation}
           />
+          <ViewComponent header="Email" data={jobApplication.jobSeekerEmail} />
+          <ViewComponent header="Age" data={jobApplication.jobSeekerAge} />
           <ViewComponent
-            header="jobSeekerAge"
-            data={jobApplication.jobSeekerAge}
-          />
-          <ViewComponent
-            header="jobSeekerResumeLink"
+            header="Resume Link"
             data={jobApplication.jobSeekerResumeLink}
           />
         </div>
       </div>
-      <ViewEducationComponent header="Education" data={educationList} />
-      <ViewExperienceComponent header="Experience" data={experienceList} />
+      <ViewEducationComponent
+        header="Education"
+        data={jobApplication.educationList ? jobApplication.educationList : []}
+      />
+      <ViewExperienceComponent
+        header="Experience"
+        data={
+          jobApplication.experienceList ? jobApplication.experienceList : []
+        }
+      />
     </div>
   );
 }
@@ -74,15 +63,14 @@ const ViewEducationComponent = ({ header, data }) => {
         <div className="container">
           <div key={index}>
             <ViewComponent
-              header="instituteName"
+              header="Institute Name"
               data={education.instituteName}
             />
-            <ViewComponent header="program" data={education.program} />
-            <ViewComponent header="branch" data={education.branch} />
-            <ViewComponent header="cgpa" data={education.cgpa} />
-            <ViewComponent header="startDate" data={education.startDate} />
-            <ViewComponent header="endDate" data={education.endDate} />
-            <ViewComponent header="sem" data={education.sem} />
+            <ViewComponent header="Program" data={education.program} />
+            <ViewComponent header="Branch" data={education.branch} />
+            <ViewComponent header="CGPA" data={education.cgpa} />
+            <ViewComponent header="Start Date" data={education.startDate} />
+            <ViewComponent header="End Date" data={education.endDate} />
           </div>
         </div>
       ))}
@@ -97,18 +85,17 @@ const ViewExperienceComponent = ({ header, data }) => {
       {data.map((experience, index) => (
         <div className="container">
           <div key={index}>
-            <ViewComponent header="companyName" data={experience.companyName} />
-            <ViewComponent header="designation" data={experience.designation} />
             <ViewComponent
-              header="descriptionOfRole"
+              header="Company Name"
+              data={experience.companyName}
+            />
+            <ViewComponent header="Designation" data={experience.designation} />
+            <ViewComponent
+              header="Description of the Role"
               data={experience.descriptionOfRole}
             />
-            <ViewComponent header="startDate" data={experience.startDate} />
-            <ViewComponent header="endDate" data={experience.endDate} />
-            <ViewComponent
-              header="isCurrentlyWorking"
-              data={experience.isCurrentlyWorking}
-            />
+            <ViewComponent header="Start Date" data={experience.startDate} />
+            <ViewComponent header="End Date" data={experience.endDate} />
           </div>
         </div>
       ))}
@@ -124,6 +111,5 @@ export const ViewComponent = ({ header, data }) => {
     </div>
   );
 };
-
 
 export default ViewApplication;

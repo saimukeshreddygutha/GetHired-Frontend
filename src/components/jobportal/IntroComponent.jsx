@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function IntroComponent() {
   return (
-    <div className="IntroComponent">
+    <div className="IntroComponent text-center">
       <div className="d-flex flex-column align-items-center justify-content-center text-center mt-5">
         <h1 className="brand-color">
           <span className="at-font">at</span>
