@@ -86,7 +86,7 @@ export function RecruiterLoginComponent() {
   const navigate = useNavigate();
   return (
     <div className="container">
-      <h3 className="text-center pb-4">Login page for Recruiter</h3>
+      <h3 className="text-center pb-4">Recruiter Login</h3>
       <LoginForm
         role="recruiter"
         onSuccess={() => navigate("/recruiter/dashboard")}
@@ -99,7 +99,7 @@ export function JobSeekerLoginComponent() {
   const navigate = useNavigate();
   return (
     <div className="container">
-      <h3 className="text-center pb-4">Login page for JobSeeker</h3>
+      <h3 className="text-center pb-4">Jobseeker Login</h3>
       <LoginForm
         role="jobseeker"
         onSuccess={() => navigate("/jobseeker/dashboard")}
@@ -111,6 +111,9 @@ export function JobSeekerLoginComponent() {
 export function AdminLoginComponent() {
   const navigate = useNavigate();
   return (
-    <LoginForm role="admin" onSuccess={() => navigate("/admin/dashboard")} />
+    <div className="container">
+      <h3 className="text-center pb-4">Admin Login</h3>
+      <LoginForm role="admin" onSuccess={() => navigate("/admin/dashboard")} />
+    </div>
   );
 }

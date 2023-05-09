@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Formik, Field, FieldArray, Form } from "formik";
 import { addEduApi } from "./api/JobPortalAPIService";
 import { useAuth } from "./security/AuthContext";
-import { error } from "jquery";
 function EducationForm() {
   const authContext = useAuth();
   const username = authContext.username;

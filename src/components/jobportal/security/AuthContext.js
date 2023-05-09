@@ -23,6 +23,7 @@ export default function AuthProvider({ children }) {
       const response = await executeBasicAuthenticationService(baToken);
 
       if (response.status == 200) {
+        localStorage.setItem('authToken', baToken);
         setToken(baToken);
         setAuthenticated(true);
         setUsername(username);
@@ -54,6 +55,7 @@ export default function AuthProvider({ children }) {
   }
 
   function logout() {
+    localStorage.removeItem('authToken')
     setAuthenticated(false);
     setUsername(null);
     setToken(null);

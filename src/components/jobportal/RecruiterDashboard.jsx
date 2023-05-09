@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import JobAdsTable from "./JobAdsTable";
-import JobApplicationsTable from "./JobApplicationsTable";
 import { Link } from "react-router-dom";
 import { useAuth } from "./security/AuthContext";
 import { getRecruiterJobAds } from "./api/JobPortalAPIService";
