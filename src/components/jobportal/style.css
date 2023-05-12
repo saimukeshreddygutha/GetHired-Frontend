@@ -34,7 +34,7 @@
 
 .copyright{
     font-weight: 100;
-    font-size: x-small;
+    font-size: small;
 }
 
 .background {
@@ -54,9 +54,21 @@
 }
 
 .jbptl{
-    min-height: 568px;
+    min-height: 100vh;
 }
 
 .center{
     text-align: center;
+}
+
+.dropdown-menu > .dropdown-item{
+    color: #fff;
+}
+
+
+.dropdown > .dropdown-menu{
+    background-color: #19376D;
+    /* margin-top: auto; */
+    border-radius: 0;
+    border-top: none;
 }
