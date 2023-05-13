@@ -25,6 +25,7 @@
 .navbar-brand{
     font-family: 'Merriweather Sans';
     font-weight: 700;
+    
 }
 
 .reg{
@@ -35,6 +36,7 @@
 .copyright{
     font-weight: 100;
     font-size: small;
+    color: #A5D7E8;
 }
 
 .background {
@@ -47,10 +49,23 @@
 
 .brand {
     color: #fff;
+    
+}
+
+.brand-title{
+    font-size: larger;
+    vertical-align: bottom;
 }
 
 .footer{
     background-color: #19376D;
+}
+
+.brand-logo{
+    vertical-align: bottom;
+    margin-right: .75vh;
+    height: 40px;
+    width: 40px;
 }
 
 .jbptl{
@@ -72,3 +87,30 @@
     border-radius: 0;
     border-top: none;
 }
+
+.dropdown > .dropdown-toggle{
+    color: white;
+}
+
+
+.nav-link{
+    height: 100%;
+    margin-right: 1vh;
+}
+
+.introbg{
+    background-image: linear-gradient(to bottom, rgba(195, 195, 245, 0.52), rgba(59, 65, 78, 0.73)), url("../images/introbg.jpg");
+    background-size: cover;
+    height: 120vh;
+    background-repeat:no-repeat;
+   
+    
+}
+
+.enterlogo{
+    height: 24px;
+    width: 24px;
+    vertical-align: bottom;
+    margin-right: .5vh;
+}
+

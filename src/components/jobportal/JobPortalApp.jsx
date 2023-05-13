@@ -51,7 +51,7 @@ export default function JobPortalApp() {
     <AuthProvider>
       <BrowserRouter>
         <HeaderComponent />
-        <div className="container bg-light jbptl">
+        <div className="jbptl">
           <Routes>
             <Route path="/" element={<IntroComponent />} />
             <Route
@@ -76,7 +76,11 @@ export default function JobPortalApp() {
             />
             <Route
               path="/recruiter/:username/applications/:id"
-              element={<RCAuthenticatedRoute><JobApplicationsTable /></RCAuthenticatedRoute>}
+              element={
+                <RCAuthenticatedRoute>
+                  <JobApplicationsTable />
+                </RCAuthenticatedRoute>
+              }
             />
             <Route
               path="/recruiter/dashboard"
