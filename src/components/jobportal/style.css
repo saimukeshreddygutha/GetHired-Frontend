@@ -104,9 +104,8 @@
 }
 
 .introbg{
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.6)), url("../images/introbg.jpg");
+    background-image: linear-gradient(to bottom, rgba(200, 200, 200, 0.6), rgba(0, 0, 0, 0.6)), url("../images/introbg.jpg");
     background-size: cover;
-    height: 120vh;
     background-repeat:no-repeat;
    
     
@@ -121,7 +120,6 @@
 
 .introcontainer{
     
-    height:100vh;
     padding-top: 5%;
     display: flex;
     
@@ -143,7 +141,7 @@
     font-size: 7.5vh;
     color: #393053;
     backdrop-filter: blur(3px);
-    text-shadow: 4px 4px 4px rgba(255,255,255,0.8);
+    text-shadow: 4px 4px 4px rgba(128,128,128,0.5);
 }
 
 .intro-subheading{
@@ -158,15 +156,15 @@
     border-radius: 4px;
     font-family: "Arial";
     color: #fff;
-    font-size: 25px;
-    padding: 25px 60px 25px 60px;
+    font-size: 1.56rem;
+    padding: 1.56rem 3.75rem 1.56rem 3.75rem;
     text-decoration: none;
   }
   
 .register-btn-left:hover {
     color: #0B2447;
     background-color: #fff;
-    font-size: 25px;
+    font-size: 1.56rem;
     border-color: #0B2447;
 }
 
@@ -177,8 +175,8 @@
     border-radius: 4px;
     font-family: "Arial";
     color: #0B2447;
-    font-size: 25px;
-    padding: 25px 60px 25px 60px;
+    font-size: 1.56rem;
+    padding: 1.56rem 3.75rem 1.56rem 3.75rem;
     text-decoration: none;
   }
   

@@ -6,7 +6,7 @@ import recruiter from "../images/recruiter.png";
 export default function IntroComponent() {
   return (
     <div className="introbg">
-      <div className="introcontainer">
+      <div className="introcontainer pb-5">
         <div className="col center">
           <div className="container pt-5 px-5">
             <div className="mb-5">
@@ -46,6 +46,12 @@ export default function IntroComponent() {
             <br />
             <br />
             <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <h1 className="introheader mb-5">
               Looking to <br /> hire Young and brilliant minds from the Campus?
             </h1>
@@ -60,7 +66,7 @@ export default function IntroComponent() {
                 Login Here
               </Link>
             </div>
-            <div>
+            <div className="mb-5">
               <Link
                 className="register-btn-left shadow-lg me-5 verticalalign mb-0"
                 to="/recruiter/register"
