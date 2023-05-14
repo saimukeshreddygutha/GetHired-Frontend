@@ -138,11 +138,11 @@
     text-align: left;
     font-weight: 600;
     font-family: 'Fredericka the Great', cursive;
-    font-size: 7.5vh;
+    font-size: 7.1vh;
     color: #FFB84C;
     background-color: rgba(0,0,0,0.1);
     backdrop-filter: blur(4px);
-    text-shadow: 4px 4px 4px rgba(11,36,71,0.5);
+    text-shadow: 4px 4px 4px rgba(11,36,71,0.8);
 }
 
 .intro-subheading{
