@@ -18,7 +18,7 @@ export default function IntroComponent() {
                 Register Here!
               </Link>
             </div>
-            <div className="my-5 align-items-left">
+            <div className="my-5 align-items-left px-5">
               <Link
                 className="register-btn-right shadow-lg"
                 to="/jobseeker/login"
@@ -29,7 +29,7 @@ export default function IntroComponent() {
                 Already having an account?
               </div>
             </div>
-            <h1 className="introheader mb-5">
+            <h1 className="introheader mb-5 px-5">
               Interested in opportunities like internships, projects and jobs?
             </h1>
 
@@ -52,10 +52,10 @@ export default function IntroComponent() {
             <br />
             <br />
             <br />
-            <h1 className="introheader mb-5">
+            <h1 className="introheader mb-5 px-5">
               Looking to <br /> hire Young and brilliant minds from the Campus?
             </h1>
-            <div className="my-5 align-items-right">
+            <div className="my-5 align-items-right px-5">
               <div className="mb-4 haveaccount-left">
                 Already having an account?
               </div>
