@@ -29,7 +29,7 @@ export default function IntroComponent() {
                 Already having an account?
               </div>
             </div>
-            <h1 className="introheader mb-5 px-5">
+            <h1 className="introheader mb-5 px-5 py-5">
               Interested in opportunities like internships, projects and jobs?
             </h1>
 
@@ -52,7 +52,7 @@ export default function IntroComponent() {
             <br />
             <br />
             <br />
-            <h1 className="introheader mb-5 px-5">
+            <h1 className="introheader mb-5 px-5 py-5">
               Looking to <br /> hire Young and brilliant minds from the Campus?
             </h1>
             <div className="my-5 align-items-right px-5">
