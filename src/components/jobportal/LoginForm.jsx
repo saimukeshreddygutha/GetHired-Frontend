@@ -28,7 +28,16 @@ function LoginForm({ role, onSuccess }) {
   }
 
   return (
-    <div className="container bg-light w-25">
+    <div className="container w-25 p-5 login-form">
+      {role === "jobseeker" && (
+        <h1 className="center login-form-h1">Jobseeker Login</h1>
+      )}
+      {role === "recruiter" && (
+        <h1 className="center login-form-h1">Recruiter Login</h1>
+      )}
+      {role === "admin" && (
+        <h1 className="center login-form-h1">Admin Login</h1>
+      )}
       <div>
         <Formik
           initialValues={{ username: "", password: "" }}
@@ -70,7 +79,10 @@ function LoginForm({ role, onSuccess }) {
                 />
               </fieldset>
               <div className="center">
-                <button className="btn btn-primary px-4" type="submit">
+                <button
+                  className="btn btn-primary px-4 py-2 shadow-lg"
+                  type="submit"
+                >
                   Login
                 </button>
               </div>
@@ -85,8 +97,7 @@ function LoginForm({ role, onSuccess }) {
 export function RecruiterLoginComponent() {
   const navigate = useNavigate();
   return (
-    <div className="container">
-      <h3 className="text-center pb-4">Recruiter Login</h3>
+    <div className="recruiter-login pt-5">
       <LoginForm
         role="recruiter"
         onSuccess={() => navigate("/recruiter/dashboard")}
@@ -98,8 +109,7 @@ export function RecruiterLoginComponent() {
 export function JobSeekerLoginComponent() {
   const navigate = useNavigate();
   return (
-    <div className="container">
-      <h3 className="text-center pb-4">Jobseeker Login</h3>
+    <div className="jobseeker-login pt-5">
       <LoginForm
         role="jobseeker"
         onSuccess={() => navigate("/jobseeker/dashboard")}
@@ -111,8 +121,7 @@ export function JobSeekerLoginComponent() {
 export function AdminLoginComponent() {
   const navigate = useNavigate();
   return (
-    <div className="container">
-      <h3 className="text-center pb-4">Admin Login</h3>
+    <div className="admin-login pt-5">
       <LoginForm role="admin" onSuccess={() => navigate("/admin/dashboard")} />
     </div>
   );
