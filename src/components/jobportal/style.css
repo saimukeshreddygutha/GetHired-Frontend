@@ -9,6 +9,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
 
+
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 .intropage{
     font-family: "Merriweather Sans";
 }
@@ -99,7 +101,7 @@
 }
 
 .introbg{
-    background-image: linear-gradient(to bottom, rgba(195, 195, 245, 0.52), rgba(59, 65, 78, 0.73)), url("../images/introbg.jpg");
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.6)), url("../images/introbg.jpg");
     background-size: cover;
     height: 120vh;
     background-repeat:no-repeat;
@@ -112,5 +114,86 @@
     width: 24px;
     vertical-align: bottom;
     margin-right: .5vh;
+}
+
+.introcontainer{
+    
+    height:100vh;
+    padding-top: 5%;
+    display: flex;
+    
+    
+}
+
+.introicons{
+    height: 10rem;
+    width: auto;
+    border-radius: 2rem;
+    align-items: left;
+}
+
+.introheader{
+    border-radius: 2rem;
+    text-align: left;
+    font-family: 'Special Elite', cursive;
+    font-size: 7.5vh;
+    color: #393053;
+    backdrop-filter: blur(3px);
+    text-shadow: 4px 4px 4px rgba(255,255,255,0.8);
+}
+
+.intro-subheading{
+    color: aliceblue;
+    font-size: 1.5rem;
+}
+
+.register-btn-left {
+    background: #0B2447;
+    border-width: 4px;
+    border-color: #fff;
+    border-radius: 4px;
+    font-family: "Arial";
+    color: #fff;
+    font-size: 25px;
+    padding: 25px 60px 25px 60px;
+    text-decoration: none;
+  }
+  
+.register-btn-left:hover {
+    color: #0B2447;
+    background-color: #fff;
+    font-size: 25px;
+    border-color: #0B2447;
+}
+
+.register-btn-right {
+    background: #fff;
+    border-width: 4px;
+    border-color: #fff;
+    border-radius: 4px;
+    font-family: "Arial";
+    color: #0B2447;
+    font-size: 25px;
+    padding: 25px 60px 25px 60px;
+    text-decoration: none;
+  }
+  
+.register-btn-right:hover {
+    color: #fff;
+    background-color: #0B2447;
+    font-size: 25px;
+    border-color: #0B2447;
+}
+
+.align-items-right{
+    text-align: right;
+}
+
+.align-items-left{
+    text-align: left;
+}
+
+.haveaccount-left{
+    color: #A5D7E8;
 }
 
