@@ -26,7 +26,7 @@ export default function IntroComponent() {
                 Login Here
               </Link>
               <div className="mt-4 haveaccount-left">
-                Already have an account?
+                Already having an account?
               </div>
             </div>
             <h1 className="introheader mb-5">
@@ -38,12 +38,20 @@ export default function IntroComponent() {
         </div>
         <div className="col center">
           <div className="container pt-5 px-5">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <h1 className="introheader mb-5">
               Looking to <br /> hire Young and brilliant minds from the Campus?
             </h1>
             <div className="my-5 align-items-right">
               <div className="mb-4 haveaccount-left">
-                Already have an account?
+                Already having an account?
               </div>
               <Link
                 className="register-btn-right shadow-lg"

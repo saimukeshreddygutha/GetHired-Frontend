@@ -10,7 +10,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
 
 
-  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
 .intropage{
     font-family: "Merriweather Sans";
 }
@@ -135,7 +138,8 @@
 .introheader{
     border-radius: 2rem;
     text-align: left;
-    font-family: 'Special Elite', cursive;
+    font-weight: 600;
+    font-family: 'Fredericka the Great', cursive;
     font-size: 7.5vh;
     color: #393053;
     backdrop-filter: blur(3px);
