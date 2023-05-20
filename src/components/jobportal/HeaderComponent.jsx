@@ -33,7 +33,7 @@ export default function HeaderComponent() {
         </div>
         <ul className="navbar-nav">
           {isAuthenticated && (
-            <li className="nav-item">
+            <li className="nav-item me-5 pe-5">
               <Link className="nav-link" to="/logout" onClick={logout}>
                 <span className="brand">Logout</span>
               </Link>

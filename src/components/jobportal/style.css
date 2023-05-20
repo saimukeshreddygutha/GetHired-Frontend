@@ -248,6 +248,7 @@
 
 .reg-form{
     border-radius: 5px;
+    min-height: 90vh;
 }
 
 .reg-form-logo{
@@ -260,4 +261,57 @@
     background-position: top left;
     height: fit-content;
     min-height: 100vh;
+}
+
+
+
+
+.role-name{
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    
+}
+
+.company-name{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.jobad-headings{
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.dflex{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.job-ad{
+    border: 1px solid rgba(125, 125, 125, 0.3);
+    border-radius: 8px;
+}
+
+.readmore{
+    color: blue;
+    text-align: right;
+}
+
+.readless{
+    color: red;
+    text-align: right;
+}
+
+.date{
+    color: rgba(127, 127, 127, 0.6);
+    font-size: small;
+}
+
+.map{
+    height: 1.3rem;
+    margin-right: 1rem;
 }

@@ -1,13 +1,23 @@
 import { Formik, Form, ErrorMessage, Field } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "./security/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function LoginForm({ role, onSuccess }) {
   const authContext = useAuth();
   const navigate = useNavigate();
   const [showLoginError, setShowLoginError] = useState(false);
   const [isLoggedin, setIsLoggedIn] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   async function onSubmit(values) {
     console.log(values);
@@ -29,6 +39,14 @@ function LoginForm({ role, onSuccess }) {
 
   return (
     <div className="container w-25 p-5 login-form">
+      {loading && (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
       {role === "jobseeker" && (
         <h1 className="center login-form-h1">Jobseeker Login</h1>
       )}

@@ -24,6 +24,10 @@ export default function AuthProvider({ children }) {
 
       if (response.status == 200) {
         localStorage.setItem('authToken', baToken);
+        localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("role", role);
+        localStorage.setItem("username", username);
+        localStorage.setItem("id", userId);
         setToken(baToken);
         setAuthenticated(true);
         setUsername(username);

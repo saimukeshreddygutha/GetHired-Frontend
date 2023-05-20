@@ -4,10 +4,19 @@ import {
   addUserApi,
   usernameApi,
 } from "./api/JobPortalAPIService";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function RecruiterRegisterComponent() {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   const [isRegistered, setRegistered] = useState(false);
   const [usernameAlreadyExists, setUsernameAlreadyExists] = useState(false);
   async function isUsernameAlreadyExists(username) {
@@ -96,6 +105,14 @@ function RecruiterRegisterComponent() {
   };
   return (
     <div className="rectruiter-reg py-5">
+      {loading && (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
       <div className="container p-5 w-75 reg-form shadow-lg">
         <h1>
           Fill the following form to Register as a Recruiter with GetHired.in

@@ -2,10 +2,29 @@ import { Link } from "react-router-dom";
 
 import student from "../images/student.png";
 import recruiter from "../images/recruiter.png";
+import { useEffect, useState } from "react";
+import * as React from "react";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function IntroComponent() {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   return (
     <div className="introbg">
+      {loading && (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
       <div className="introcontainer pb-5">
         <div className="col center">
           <div className="container pt-5 px-5">

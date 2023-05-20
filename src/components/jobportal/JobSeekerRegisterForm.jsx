@@ -7,11 +7,19 @@ import {
 } from "./api/JobPortalAPIService";
 
 import student from "../images/student.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "./security/AuthContext";
-
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 export default function JobSeekerRegisterComponent() {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
   const [isRegistered, setRegistered] = useState(false);
   const [usernameAlreadyExists, setUsernameAlreadyExists] = useState(false);
 
@@ -110,6 +118,14 @@ export default function JobSeekerRegisterComponent() {
 
   return (
     <div className="jobseeker-reg py-5">
+      {loading && (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
       <div className="container p-5 w-75 shadow-lg reg-form">
         <div className="row">
           <div className="col-1">

@@ -6,7 +6,6 @@ import { useAuth } from "./security/AuthContext";
 import IntroComponent from "./IntroComponent";
 import JobSeekerRegisterComponent from "./JobSeekerRegisterForm";
 import { JobSeekerLoginComponent } from "./LoginForm";
-import HomeComponent from "./HomeComponent";
 import EducationForm from "./EducationForm";
 import { RecruiterLoginComponent } from "./LoginForm";
 import ExperienceForm from "./ExperienceForm";
@@ -19,6 +18,7 @@ import ViewJobAdComponent from "./ViewJobAdComponent";
 import JobSeekerDashboard from "./JobSeekerDashboard";
 import LogoutComponent from "./LogoutComponent";
 import JobApplicationsTable from "./JobApplicationsTable";
+import JobAd from "./JobAd";
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth();
   if (authContext.isAuthenticated) {
@@ -53,6 +53,7 @@ export default function JobPortalApp() {
         <HeaderComponent />
         <div className="jbptl">
           <Routes>
+            <Route path="/jobad" element={<JobAd/>} />
             <Route path="/" element={<IntroComponent />} />
             <Route
               path="/jobseeker/register"
