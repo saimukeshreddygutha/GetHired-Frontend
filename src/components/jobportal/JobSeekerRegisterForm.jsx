@@ -46,6 +46,7 @@ export default function JobSeekerRegisterComponent() {
         dateOfBirth: values.dob,
         location: values.location,
         resumeLink: values.resumeLink,
+        skills: values.skills,
         username: values.username,
       };
 
@@ -109,6 +110,8 @@ export default function JobSeekerRegisterComponent() {
     if (values.password != values.confirmPassword)
       errors.confirmPassword = "Passwords do not match!";
 
+    if(!values.skills)errors.skills = "This section cannot be empty!"
+
     if (!values.resumeLink)
       errors.resumeLink =
         "Public access link to your resume to be attached here.";
@@ -150,6 +153,7 @@ export default function JobSeekerRegisterComponent() {
               location: "",
               username: "",
               password: "",
+              skills: "",
               resumeLink: "",
               confirmPassword: "",
             }}
@@ -251,6 +255,19 @@ export default function JobSeekerRegisterComponent() {
                         type="text"
                         className="form-control"
                         name="resumeLink"
+                      />
+                    </fieldset>
+                    <fieldset className="form-group p-3">
+                      <ErrorMessage
+                        name="skills"
+                        component="div"
+                        className="alert alert-warning text-center"
+                      />
+                      <label className="form-label">Skills*</label>
+                      <Field
+                        type="text"
+                        className="form-control"
+                        name="skills"
                       />
                     </fieldset>
                   </div>
