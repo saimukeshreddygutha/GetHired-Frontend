@@ -4,6 +4,10 @@ export const apiClient = axios.create({
   baseURL: "http://localhost:8080",
 });
 
+export const pyClient = axios.create({
+  baseURL: "http://localhost:5000",
+});
+
 export const executeBasicAuthenticationService = (token) =>
   apiClient.get("/auth", {
     headers: {
@@ -55,3 +59,10 @@ export const getJobApplicationsByJobId = (username, id) =>
 
 export const getApplicationByApplicationId = (username, id) =>
   apiClient.get(`recruiter/${username}/application/${id}`);
+
+export const getRank = (details) => pyClient.post("/rank", details);
+
+export const getSortedJobads = (details) => pyClient.post("/sort_ads", details);
+
+export const getAllAppliedJobs = (username) =>
+  apiClient.get(`jobseeker/${username}/applied`);

@@ -13,6 +13,8 @@ function JobAd({
   skillsRequired,
   description,
   createdDate,
+  match,
+  isRequirementfullfilled,
 }) {
   const authContext = useAuth();
   const isAuthenticated = authContext.isAuthenticated;
@@ -20,7 +22,6 @@ function JobAd({
   const username = authContext.username;
   const [isExpanded, setExpanded] = useState(false);
   function toggleReadMore() {
-    console.log(experienceRequired, skillsRequired);
     setExpanded((prevState) => !prevState);
   }
 
@@ -37,13 +38,17 @@ function JobAd({
       <p className="mb-0 date">Date Posted: {createdDate}</p>
       <div className="dflex mb-2">
         <h1 className="role-name py-2">{roleName}</h1>
-
-        {role === "jobseeker" && (
+        {role === "jobseeker" && !isRequirementfullfilled && (
           <button
             className="btn btn-primary m-2"
             onClick={() => applyJob(username, jobId)}
           >
             Apply
+          </button>
+        )}
+        {role === "jobseeker" && isRequirementfullfilled && (
+          <button className="btn btn-warning m-2" disabled={true}>
+            Closed
           </button>
         )}
         {role === "recruiter" && (
@@ -63,7 +68,7 @@ function JobAd({
           {location}
         </p>
       </div>
-          <p className="jobad-headings">Job Description:</p>
+      <p className="jobad-headings">Job Description:</p>
       <p className="desc">{description}</p>
       {!isExpanded ? (
         <p className="readmore" onClick={toggleReadMore}>

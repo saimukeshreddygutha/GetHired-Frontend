@@ -18,6 +18,7 @@ import ViewJobAdComponent from "./ViewJobAdComponent";
 import JobSeekerDashboard from "./JobSeekerDashboard";
 import LogoutComponent from "./LogoutComponent";
 import JobApplicationsTable from "./JobApplicationsTable";
+import HomeComponent from "./Home";
 import JobAd from "./JobAd";
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth();
@@ -53,7 +54,8 @@ export default function JobPortalApp() {
         <HeaderComponent />
         <div className="jbptl">
           <Routes>
-            <Route path="/jobad" element={<JobAd/>} />
+            <Route path="/rank" element={<HomeComponent />} />
+            <Route path="/jobad" element={<JobAd />} />
             <Route path="/" element={<IntroComponent />} />
             <Route
               path="/jobseeker/register"
