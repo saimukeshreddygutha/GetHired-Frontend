@@ -17,7 +17,7 @@ function RecruiterDashboard() {
       })
       .catch((error) => console.log(error));
   }
-  
+
   return (
     <div className="container">
       <h1 className="text-center">Welcome {username}</h1>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "./security/AuthContext";
 import { Link } from "react-router-dom";
-import { applyForJob } from "./api/JobPortalAPIService";
+import { applyForJob, getRank } from "./api/JobPortalAPIService";
 import map from "../images/map.png";
 function JobAd({
   jobId,
@@ -15,6 +15,8 @@ function JobAd({
   createdDate,
   match,
   isRequirementfullfilled,
+  applied,
+  reload,
 }) {
   const authContext = useAuth();
   const isAuthenticated = authContext.isAuthenticated;
@@ -25,25 +27,42 @@ function JobAd({
     setExpanded((prevState) => !prevState);
   }
 
-  function applyJob(username, jobAdId) {
+  async function applyJob(username, jobAdId) {
     if (role != "jobseeker") return;
-    applyForJob(username, jobAdId)
+    const response = await getRank({
+      jobDesc: description + " " + skillsRequired + " " + experienceRequired,
+      username: username,
+    });
+    const match = response.data.match;
+
+    applyForJob(username, jobAdId, { match: match })
       .then((response) => {
-        if (response.status == 201) console.log("Success");
+        if (response.status == 201) reload();
       })
       .catch((error) => console.log(error));
   }
   return (
     <div className="container job-ad px-5 py-3 my-3 shadow">
       <p className="mb-0 date">Date Posted: {createdDate}</p>
+      {match ? <Match match={match} /> : ""}
       <div className="dflex mb-2">
         <h1 className="role-name py-2">{roleName}</h1>
-        {role === "jobseeker" && !isRequirementfullfilled && (
+
+        {role === "jobseeker" && !isRequirementfullfilled && !applied && (
           <button
             className="btn btn-primary m-2"
             onClick={() => applyJob(username, jobId)}
           >
             Apply
+          </button>
+        )}
+        {role === "jobseeker" && !isRequirementfullfilled && applied && (
+          <button
+            className="btn btn-success m-2"
+            onClick={() => applyJob(username, jobId)}
+            disabled={applied}
+          >
+            Applied
           </button>
         )}
         {role === "jobseeker" && isRequirementfullfilled && (
@@ -63,6 +82,7 @@ function JobAd({
 
       <div className="dflex">
         <h2 className="company-name">{companyName}</h2>
+
         <p className="me-2">
           <img className="map" src={map} />
           {location}
@@ -94,6 +114,14 @@ function JobAd({
         </div>
       )}
     </div>
+  );
+}
+
+function Match(props) {
+  return (
+    <span className="match">
+      Profile Match: <span className="inner-match">{props.match}%</span>
+    </span>
   );
 }
 

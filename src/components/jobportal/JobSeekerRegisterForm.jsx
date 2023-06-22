@@ -3,6 +3,7 @@ import {
   addJobseekerApi,
   addUserApi,
   isUsernameAlreadyExists,
+  uploadFiletoPy,
   usernameApi,
 } from "./api/JobPortalAPIService";
 
@@ -14,6 +15,8 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 export default function JobSeekerRegisterComponent() {
   const [loading, setLoading] = useState(false);
+  const [resumeFile, setResumeFile] = useState(null);
+  const [resumeContent, setResumeContent] = useState("");
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -45,9 +48,9 @@ export default function JobSeekerRegisterComponent() {
         gender: values.gender,
         dateOfBirth: values.dob,
         location: values.location,
-        resumeLink: values.resumeLink,
         skills: values.skills,
         username: values.username,
+        resumeContent: resumeContent,
       };
 
       let user = {
@@ -110,14 +113,28 @@ export default function JobSeekerRegisterComponent() {
     if (values.password != values.confirmPassword)
       errors.confirmPassword = "Passwords do not match!";
 
-    if(!values.skills)errors.skills = "This section cannot be empty!"
+    if (!values.skills) errors.skills = "This section cannot be empty!";
 
-    if (!values.resumeLink)
-      errors.resumeLink =
-        "Public access link to your resume to be attached here.";
+    if (resumeContent == "")
+      errors.resume = "Please upload a file that is valid";
 
     return errors;
   };
+
+  function onFileChangeHandler(e) {
+    setResumeFile(e.target.files[0]);
+  }
+
+  async function onFileSubmit(e) {
+    e.preventDefault();
+    let file = resumeFile;
+    const formData = new FormData();
+    formData.append("file", file);
+
+    let response = await uploadFiletoPy(formData);
+    setResumeContent(response.data.resume_content);
+    console.log(resumeContent);
+  }
 
   return (
     <div className="jobseeker-reg py-5">
@@ -154,7 +171,6 @@ export default function JobSeekerRegisterComponent() {
               username: "",
               password: "",
               skills: "",
-              resumeLink: "",
               confirmPassword: "",
             }}
             enableReinitialize={true}
@@ -244,18 +260,26 @@ export default function JobSeekerRegisterComponent() {
                         name="location"
                       />
                     </fieldset>
+
                     <fieldset className="form-group p-3">
                       <ErrorMessage
-                        name="resumeLink"
+                        name="resume"
                         component="div"
                         className="alert alert-warning text-center"
                       />
-                      <label className="form-label">Resume Link*</label>
+                      <label className="form-label">Resume*</label>
                       <Field
-                        type="text"
+                        type="file"
+                        name="resume"
                         className="form-control"
-                        name="resumeLink"
+                        onChange={onFileChangeHandler}
                       />
+                      <button
+                        className="btn btn-primary mt-1"
+                        onClick={onFileSubmit}
+                      >
+                        Upload
+                      </button>
                     </fieldset>
                     <fieldset className="form-group p-3">
                       <ErrorMessage

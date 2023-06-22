@@ -20,6 +20,7 @@ import LogoutComponent from "./LogoutComponent";
 import JobApplicationsTable from "./JobApplicationsTable";
 import HomeComponent from "./Home";
 import JobAd from "./JobAd";
+import AdminDashboard from "./AdminDashboard";
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth();
   if (authContext.isAuthenticated) {
@@ -47,6 +48,15 @@ function RCAuthenticatedRoute({ children }) {
   return <Navigate to="/recruiter/login" />;
 }
 
+function AdminAuthenticatedRoute({ children }) {
+  const authContext = useAuth();
+  if (authContext.isAuthenticated && authContext.role === "admin") {
+    return children;
+  }
+
+  return <Navigate to="/admin/login" />;
+}
+
 export default function JobPortalApp() {
   return (
     <AuthProvider>
@@ -70,7 +80,7 @@ export default function JobPortalApp() {
               element={<JobSeekerLoginComponent />}
             />
             <Route
-              path="/jobseeker/dashboard"
+              path="/jobseeker/dashboard/*"
               element={
                 <JSAuthenticatedRoute>
                   <JobSeekerDashboard />
@@ -91,6 +101,14 @@ export default function JobPortalApp() {
                 <RCAuthenticatedRoute>
                   <RecruiterDashboard />
                 </RCAuthenticatedRoute>
+              }
+            />
+            <Route
+              path="/admin/dashboard"
+              element={
+                <AdminAuthenticatedRoute>
+                  <AdminDashboard />
+                </AdminAuthenticatedRoute>
               }
             />
             <Route path="/admin/login" element={<AdminLoginComponent />} />
@@ -146,6 +164,7 @@ export default function JobPortalApp() {
                 </JSAuthenticatedRoute>
               }
             />
+
             <Route path="/job-ads" element={<RecruiterDashboard />} />
 
             <Route path="/logout" element={<LogoutComponent />} />

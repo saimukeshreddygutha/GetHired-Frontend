@@ -29,6 +29,7 @@ function JobApplicationsTable() {
           <th>Email</th>
           <th>Location</th>
           <th>Resume Link</th>
+          <th>Match</th>
           <th>View Application</th>
         </tr>
       </thead>
@@ -41,6 +42,7 @@ function JobApplicationsTable() {
             <td>{jobApplication.jobSeekerEmail}</td>
             <td>{jobApplication.jobSeekerLocation}</td>
             <td>{jobApplication.jobSeekerResumeLink}</td>
+            <td>{jobApplication.match}</td>
             <td>
               <Link
                 to={`/recruiter/${username}/application/view/${jobApplication.id}`}

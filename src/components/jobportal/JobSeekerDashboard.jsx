@@ -13,7 +13,8 @@ function JobSeekerDashboard() {
   const username = authContext.username;
   const jobSeekerId = authContext.userId;
   useEffect(() => retrieveAllApplications(), []);
-
+  const [show, setShow] = useState("jobads");
+  const [applied, setApplied] = useState([]);
   const [jobAds, setjobAds] = useState([]);
   function retrieveAllApplications() {
     getAllJobAds(username).then((response) => {
@@ -31,20 +32,24 @@ function JobSeekerDashboard() {
   }
 
   function getAppliedJobs() {
+    setShow("applied");
     getAllAppliedJobs(username)
-      .then((response) => setjobAds(response.data))
+      .then((response) => setApplied(response.data))
       .catch((error) => console.log(error));
+
+    console.log(applied);
   }
   function getApplicationsForJobSeeker() {}
   return (
     <div className="py-5 mx-5">
       <div className="row">
         <div className="col-2 pt-5">
-          <button className="btn btn-success" onClick={sortAdsByMatch}>
-            Match
+          <button className="btn btn-success mb-1" onClick={sortAdsByMatch}>
+            Match Profile
           </button>
+          <br />
           <button className="btn btn-success" onClick={getAppliedJobs}>
-            Applied
+            Applied JobAds
           </button>
           <Link
             className="btn btn-success my-1"
@@ -60,9 +65,20 @@ function JobSeekerDashboard() {
           </Link>
         </div>
 
-        <div className="col">
-          <JobAdsTable jobAds={jobAds} />
-        </div>
+        {show === "jobads" && (
+          <div className="col">
+            <JobAdsTable
+              jobAds={jobAds}
+              applied={false}
+              reload={retrieveAllApplications}
+            />
+          </div>
+        )}
+        {show === "applied" && (
+          <div className="col">
+            <JobAdsTable jobAds={applied} applied={true} />
+          </div>
+        )}
       </div>
     </div>
   );

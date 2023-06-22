@@ -9,7 +9,7 @@ function JobAdsTable(props) {
   const username = authContext.username;
   const role = authContext.role;
   const userId = authContext.userId;
-  const { jobAds } = props;
+  const { jobAds, applied, reload } = props;
   function applyJob(username, jobAdId) {
     if (role != "jobseeker") return;
     applyForJob(username, jobAdId)
@@ -23,7 +23,12 @@ function JobAdsTable(props) {
   return (
     <div>
       {jobAds.map((jobAd) => (
-        <JobAd {...jobAd} />
+        <JobAd
+          key={jobAd.jobAdId}
+          {...jobAd}
+          applied={applied}
+          reload={reload}
+        />
       ))}
     </div>
   );

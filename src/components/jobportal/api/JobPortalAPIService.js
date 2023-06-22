@@ -51,8 +51,8 @@ export const getRecruiterJobAds = (username) =>
 
 export const getJobAd = (id) => apiClient.get(`jobads/get/${id}`);
 
-export const applyForJob = (username, id) =>
-  apiClient.post(`/jobseeker/${username}/jobads/${id}/apply`);
+export const applyForJob = (username, id, details) =>
+  apiClient.post(`/jobseeker/${username}/jobads/${id}/apply`, details);
 
 export const getJobApplicationsByJobId = (username, id) =>
   apiClient.get(`recruiter/${username}/applications/jobad/${id}`);
@@ -66,3 +66,9 @@ export const getSortedJobads = (details) => pyClient.post("/sort_ads", details);
 
 export const getAllAppliedJobs = (username) =>
   apiClient.get(`jobseeker/${username}/applied`);
+
+export const uploadFiletoPy = (params) => pyClient.post("/fileupload", params);
+
+export const getAllJS = () => apiClient.get("/admin/all-jobseeker");
+
+export const getAllRec = () => apiClient.get("/admin/all-recruiter");
